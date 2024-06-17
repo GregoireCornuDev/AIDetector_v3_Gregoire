@@ -3,8 +3,10 @@ package ai.detector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
@@ -19,22 +21,32 @@ public class AppController {
     @FXML private TextField cheminFichierField;
     @FXML private TextField typeFichierField;
     @FXML private TextField scoreIAField;
+    @FXML private Button btnCharger;
+
+
 
     private ObservableList<Projet> projets = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
-        listeProjets.setItems(projets);
+        if (listeProjets != null) {
+            listeProjets.setItems(projets);
 
-        listeProjets.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                listeFichiers.setItems(FXCollections.observableArrayList(newValue.getFichiers()));
-            }
-        });
+            listeProjets.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    listeFichiers.setItems(FXCollections.observableArrayList(newValue.getFichiers()));
+                }
+            });
 
-        //TODO: Ajouter le listener pour les fichiers aussi
-        // et maj les détails avec la bonne fct.  
+            //TODO: Ajouter le listener pour les fichiers aussi
+            // et maj les détails avec la bonne fct.
+        }
+
+        // Ajout d'un listener sur le bouton
+        btnCharger.setOnAction(event -> chargerDepuisDossier());
+
     }
+
 
     @FXML
     private void chargerDepuisDossier() {
@@ -44,6 +56,12 @@ public class AppController {
             try {
                 List<Projet> loadedProjects = DevoreurIO.chargerProjetsDepuisDossier(selectedDirectory.getAbsolutePath());
                 projets.setAll(loadedProjects);
+
+                // Affichage des noms des projets
+                System.out.println("Liste des projets chargés :");
+                for (Projet projet : projets) {
+                    System.out.println("- " + projet.getNom()); // Supposant que tu aies une méthode getNom() dans la classe Projet
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -107,4 +125,6 @@ public class AppController {
         // typeFichierField.setText(fichier .getType());
         scoreIAField.setText(String.valueOf(fichier.getScoreIA()));
     }
+
+    @FXML private Label debugLabel;
 }

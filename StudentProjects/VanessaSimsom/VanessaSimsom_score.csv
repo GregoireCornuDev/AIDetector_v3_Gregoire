@@ -1,0 +1,5 @@
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+01_00, VanessaSimsom, ressources/StudentProjects/dependency.xml, 0.53, false, true, false
+01_01, VanessaSimsom, ressources/StudentProjects/SpellChecker.java, 0.43, false, true, false
+01_02, VanessaSimsom, ressources/StudentProjects/VanessaSimsom_score.csv, 0.43, false, true, false
+01_03, VanessaSimsom, ressources/StudentProjects/rep_ness.txt, 0.48, false, true, false

@@ -1,0 +1,26 @@
+Rapport d'analyse
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+01_00, VanessaSimsom, ressources/StudentProjects/dependency.xml, 0.53, false, true, false
+01_01, VanessaSimsom, ressources/StudentProjects/SpellChecker.java, 0.43, false, true, false
+01_02, VanessaSimsom, ressources/StudentProjects/VanessaSimsom_score.csv, 0.43, false, true, false
+01_03, VanessaSimsom, ressources/StudentProjects/rep_ness.txt, 0.48, false, true, false
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+02_00, ErasmusVintek, ressources/StudentProjects/howto.txt, 0.55, false, true, false
+02_01, ErasmusVintek, ressources/StudentProjects/GameOfLife.java, 0.45, false, true, false
+02_02, ErasmusVintek, ressources/StudentProjects/ErasmusVintek_score.csv, 0.58, false, true, false
+02_03, ErasmusVintek, ressources/StudentProjects/rapport.txt, 0.5, false, true, false
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+03_00, MattSenex, ressources/StudentProjects/rapport_senex.txt, 0.5, false, true, false
+03_01, MattSenex, ressources/StudentProjects/intro.code, 0.38, false, true, false
+03_02, MattSenex, ressources/StudentProjects/MattSenex_score.csv, 0.64, false, true, false
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+04_00, Ethan_MountainDewMaster, ressources/StudentProjects/truc_super_long.py, 0.55, false, true, false
+04_01, Ethan_MountainDewMaster, ressources/StudentProjects/Ethan_MountainDewMaster_score.csv, 0.46, false, true, false
+04_02, Ethan_MountainDewMaster, ressources/StudentProjects/super_script.py, 0.51, false, true, false
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+05_00, Boby, ressources/StudentProjects/Boby_score.csv, 0.28, false, true, false
+05_01, Boby, ressources/StudentProjects/Report.txt, 0.52, false, true, false
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+06_00, KevinTruaux, ressources/StudentProjects/KevinTruaux_score.csv, 0.32, false, true, false
+06_01, KevinTruaux, ressources/StudentProjects/main.c, 0.39, false, true, false
+06_02, KevinTruaux, ressources/StudentProjects/rapport.txt, 0.51, false, true, false

@@ -1,0 +1,4 @@
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+06_00, KevinTruaux, ressources/StudentProjects/KevinTruaux_score.csv, 0.32, false, true, false
+06_01, KevinTruaux, ressources/StudentProjects/main.c, 0.39, false, true, false
+06_02, KevinTruaux, ressources/StudentProjects/rapport.txt, 0.51, false, true, false

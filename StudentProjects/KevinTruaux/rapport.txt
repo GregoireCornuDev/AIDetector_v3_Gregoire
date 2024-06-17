@@ -1,0 +1,70 @@
+Rapport projet WEB
+Partie contrôleur
+
+Sommaire
+
+Introduction	3
+1 Les différentes contrôleurs pour l'application Dwitter	3
+2 Le contrôleur principal	4
+3 Le contrôleur de messages	4
+4 Le contrôleur utilisateur	4
+5 Le contrôleur de notifications	4
+6 Le contrôleur de droits	4
+Conclusion	5
+
+Introduction
+------------
+
+	La partie contrôleur de l’application est le lien entre l’interface (la vue) et les données (le modèle). En effet, en fonction de la vue sélectionnée, la partie contrôleur va récupérer les données correspondantes les fournir à la vue adéquat et l’afficher.
+	
+
+1 Les différentes contrôleurs pour l'application Dwitter
+--------------------------------------------------------
+
+	Pour répondre aux besoins définis dans le cahier des charges, et de façon à poser une implémentation judicieuse, la partie contrôleur est subdivisée en deux parties : 
+Le contrôleur principal
+Les contrôleurs secondaires, ou contrôleurs spécialisés ; manipulant des données et vues spécifiques
+
+	Le contrôleur principal a pour tâche d'effectuer le lien avec la vue. En effet, lorsque l'utilisateur effectue une action via la vue (passage sur une autre page, submit sur un formulaire, etc), un passage par le contrôleur principal est déclenché. Celui-ci, en fonction de l'action effectuée par l'utilisateur, déclenche les appels nécessaires aux contrôleurs spécialisés. 
+	Les contrôleurs secondaires, quant-à-eux, gèrent des traitement plus spécifiques du cahier des charges. Le rôle de ces contrôleurs secondaire est d’utiliser les instances des modèles pour récupérer les données et afficher les vues adéquates. Les différentes actions prévues pour être prises en charge par le site sont regroupées par similitudes. Par exemple, pour toutes les actions concernant un utilisateur du système, on utilisera les méthodes de la classe Utilisateur. Cette dernière régit le comportement et la politique du site par rapport à la gestion des utilisateurs. 
+
+	Les différents contrôleurs secondaires implémentés durant le projet sont les suivants : 
+- Le contrôleur utilisateur, dont le rôle a été explicité plus haut.
+- Le contrôleur de messages
+- Le contrôleur de droits
+- Le contrôleur de notifications
+
+
+
+2 Le contrôleur principal
+-------------------------
+
+	Implémenté par la classe ControleurPrincipal, le contrôleur principal occupe deux fonctions. D’une part, l’analyse de l’URL après une requête HTTP et d’autre part, l’appel au contrôleur chargé d’exécuter l’opération correspondant à la requête de l’utilisateur. Ces rôles sont respectivement implémentés dans la méthode includeControleur().
+Cette méthode appel tout d’abord la méthode getControleur(). Celle-ci va analyser le paramètre obj de l’URL. En fonction de sa valeur, le contrôleur principal va retourner le fichier correspondant au contrôleur secondaire adéquat.
+Le contrôleur principal va ensuite inclure le fichier retourné pour ensuite appeler la méthode execute(). Cette inclusion est nécessaire puisque c’est au sein de la méthode execute() que sera créé les contrôleurs secondaires qui eux exécuteront les requêtes de l’utilisateur.
+La création du contrôleur secondaire et l’appel de la méthode adéquat dépendra des valeurs des paramètres obj et action de l’URL. Si par exemple la valeur de obj et action sont respectivement message et vue_message, la méthode execute() créera une instance de la classe ControleurMessage en guise de contrôleur secondaire pour que ce dernier appel la méthode afficherMessage() qui affichera les messages.
+
+3 Le contrôleur de messages
+---------------------------
+
+Le contrôleur de messages est chargé de gérer les fonctionnalités liées à la messagerie dans l'application. Il permet d'afficher les messages, d'envoyer de nouveaux messages, de les modifier ou de les supprimer. En interagissant avec le modèle de données correspondant et en utilisant les vues appropriées, le contrôleur de messages assure le bon fonctionnement de cette partie de l'application.
+
+4 Le contrôleur utilisateur
+---------------------------
+
+Le contrôleur utilisateur est responsable de la gestion des utilisateurs dans le système. Il permet de créer de nouveaux comptes utilisateurs, de gérer les informations personnelles des utilisateurs, de gérer les droits d'accès et les permissions, ainsi que de gérer les sessions utilisateur. En coopération avec le modèle utilisateur et les vues associées, le contrôleur utilisateur assure la sécurité et la gestion efficace des utilisateurs dans l'application.
+
+5 Le contrôleur de notifications
+--------------------------------
+
+Le contrôleur de notifications est chargé de gérer les notifications envoyées aux utilisateurs de l'application. Il permet d'envoyer des notifications en temps réel ou différé, de les afficher aux utilisateurs et de gérer leur statut (lu ou non lu). En utilisant les fonctionnalités du modèle de notification et en interagissant avec les vues appropriées, le contrôleur de notifications assure une communication efficace entre l'application et ses utilisateurs.
+
+6 Le contrôleur de droits
+-------------------------
+
+Le contrôleur de droits gère les autorisations et les privilèges des utilisateurs dans l'application. Il permet de définir les droits d'accès à certaines fonctionnalités ou données en fonction du rôle ou du statut de l'utilisateur. En utilisant les fonctionnalités du modèle de droits et en coopération avec les vues correspondantes, le contrôleur de droits garantit une sécurité et une gestion appropriée des autorisations dans l'application.
+
+Conclusion
+----------
+
+Les différents contrôleurs de l'application jouent un rôle essentiel dans son fonctionnement. En coordonnant les interactions entre les utilisateurs, les données et les vues, ils assurent une expérience utilisateur fluide et sécurisée. La subdivision des contrôleurs en contrôleur principal et contrôleurs spécialisés permet une modularité et une maintenabilité accrues de l'application. En continuant à développer et à améliorer ces contrôleurs, l'application pourra répondre efficacement aux besoins de ses utilisateurs et évoluer en fonction des exigences futures.

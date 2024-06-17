@@ -19,6 +19,7 @@ public class DevoreurIO {
         List<Projet> projets = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(chemin))) {
             String line;
+
             reader.readLine(); // skip header
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");

@@ -1,0 +1,197 @@
+Introduction
+
+La présente étude bibliographique décrit les notions de base nécessaires à l'appréciation de la pro-
+blématique de mon stage au sein de l'équipe CORDIAL de l'IRISA, dont le champ d'étude concerne
+
+le dialogue oral homme-machine. Ce champ d'étude inclut notamment la synthèse de parole de haute
+qualité à partir du texte, qui est le cadre de mon stage.
+Un signal de parole correspond à acte parlé d'origine humaine. Ce signal correspond à une réalité très
+concrète, une onde acoustique produite par l'appareil phonatoire (larynx, cavité buccale), mais dont la
+production fait intervenir des plans relativement complexes allant d'aspects de physiologie à des principes
+de cognition. Chercher à comprendre les mécanismes à l'origine de ce phénomène et tenter de reproduire
+cette réalité a toujours animé des ambitions scientiques.
+On peut décrire un signal de parole par une séquence phonétique : une suite de consonnes et de
+voyelles donc, auxquels s'adjoint une prosodie. La prosodie est un ensemble de paramètres aussi variés
+que les accents, les tons, l'intonation, etc. [Di 00]. La phonétique a permis une classication des diérents
+éléments sonores mis en ÷uvre pour exprimer un message parlé. Ces événements sonores, ou phones, sont
+produits de diérentes manières (vibration des cordes vocales, bruits de frictions, bruits explosifs, etc)
+en diérents points d'articulation (position de langue pour les voyelles, points de constriction pour les
+consonnes). De plus la réalisation d'un son dépend le plus souvent de son contexte, passé, mais aussi futur
+(on parle alors de coarticulation). Les phones ont également des caractéristiques spectrales particulières
+qui les distinguent. La phonétique retient la notion de formants, susant pour décrire les principaux
+
+éléments sonores dans une langue. Il s'agit de fréquences particulières correspondant aux modes de réso-
+nances des cavités supraglottiques. Les deux premiers formants, nommés F1 et F2, sont par exemple très
+
+utilisés pour caractériser les voyelles. Le formant F1 est corrélé à l'ouverture de la bouche, ou aperture,
+et oscille typiquement entre 320 et 1000 Hz pour les diérentes voyelles du français. Le F2 correspond à
+la place de la langue dans la bouche (avant/arrière) et oscille entre 800 et 3200 Hz en français. Au delà
+des formants, la réponse fréquentielle du système physique résonant permet de caractériser l'ensemble
+
+des sons produits par un locuteur. A ces caractéristiques spectrales, il faut ajouter la fréquence fonda-
+mentale, F0 (i.e. la hauteur de la voix), qui caractérise la notion de mélodie pour les sons vibrant ainsi
+
+que les informations de rythme (débit syllabique) etc. Le lecteur soucieux d'en apprendre plus sur l'ana-
+lyse de la parole pourra se reporter à l'excellent livre  La parole et son traitement automatique  [Cal89].
+
+A partir d'un signal de parole, on peut distinguer une activité de recherche qui vise à comprendre
+les diérents processus impliqués dans la création de ce signal acoustique pour remonter à des modèles
+d'interprétation linguistique voire sémantique. On cherche par exemple à retrouver la séquence des mots
+
+qui correspondent un une phrase parlée (on parle de reconnaissance de la parole). A partir d'une descrip-
+tion linguistique, on peut chercher à étudier des mécanismes et proposer des modèles de description qui
+
+permettent de créer une parole articielle qui correspondrait à la lecture d'un message texte (on parle de
+synthèse de la parole à partir du texte).
+Cette étude bibliographique s'inscrit dans le cadre des études sur la synthèse articielle d'un signal
+de parole produit à partir d'une description linguistique qui le plus souvent est une séquence de mots.
+Le stage, intitulé  Performances des unités sandwich en synthèse de la parole à partir du texte  fait
+intervenir deux concepts. Tout d'abord celui d'un système de synthèse de la parole à partir du texte (1
+et 2) dont la qualité dépend du contenu d'un corpus de parole. Ce deuxième concept, le contenu d'une
+base de parole nécessaire à la mise en ÷vre d'un système de synthèse, sera le point d'étude de mon stage.
+Il s'agit d'étudier une nouvelle entité acoustique, dénommé sandwich ou ou sandwich vocalique, qui sera décrite dans le chapitre 3. Il s'agit d'une unité phonétique particulière et récemment proposée par Didier
+Cadic [CBD09]. Ces unités ont été introduites dans le but d'améliorer la qualité des systèmes de synthèse
+de parole par sélection d'unités. Dans les travaux de Didier Cadic, ces nouvelles unités on été introduites
+lors de l'étape de construction d'un corpus et validées par un système de synthèse ne cherchant pas à
+exploiter particulièrement ces unités. Lors de la phase de construction du corpus de parole, il s'agit de
+choisir le plus judicieusement possible les phrases que l'on va faire dire à un locuteur humain pour en
+retirer de l'information utilisée ultérieurement pour la synthèse.
+
+Pour arriver à ces ns, la présentation s'articulera autour des points suivants. Dans un premier cha-
+pitre, nous décrirons les principes sur lesquels repose un système de synthèse de parole à partir du texte
+
+et quelques problématiques en découlant. Nous passerons ensuite en revue les trois principales méthode
+de synthèse que l'on retrouve dans la littérature. Un deuxième chapitre présentera les deux systèmes
+
+concurrents utilisée actuellement, la synthèse par sélection d'unités, dite synthèse par corpus, et la syn-
+thèse à base de modèles de Markov cachés. La synthèse par sélection d'unité est le système que je serai
+
+amené à utiliser lors de mon stage. Dans un dernier chapitre, nous présenterons les sandwichs vocaliques,
+utilisés au départ pour optimiser la phase de construction du corpus de parole servant de support au
+système de synthèse par sélection d'unités.
+Enn, la conclusion nous permettra de relier les notions de synthèse par sélection d'unités et les unités
+sandwich pour pleinement comprendre la problématique de mon stage dont l'objectif sera de modier
+l'algorithme de sélection des unités de manière à ternir compte explicitement des unités sandwitch. Ce
+point n'ayant pas été traité dans la thèse de Didier Cadic. En outre, nous y présenterons la manière dont
+nous procéderons pour répondre à cette problématique et les enseignements qui pourront en être retirés.
+1 Évolution de la synthèse de parole
+Ce chapitre a pour vocation de retracer l'évolution des systèmes de synthèse de parole à partir du
+texte, ou systèmes TTS (Text-to-Speech), depuis la machine parlante du baron Von Kempelen (1791)
+aux systèmes utilisés aujourd'hui (HTS et SPC). Ces derniers feront l'objet du chapitre 2, ils ne seront
+donc que brièvement expliqués dans ce chapitre.
+1.1 Qu'est qu'un système de synthèse de parole ?
+Avant toute chose, dénissons les diérentes caractéristiques communes à tous les systèmes de synthèse
+de parole. Un système de synthèse de parole reçoit en entrée un texte contenant des phrases à synthétiser
+(gure 1). Ces phrases sont écrites dans une langue donnée (français, anglais, allemand, etc.) et avec une
+syntaxe particulière. Il convient de noter l'importance de ces deux points. En eet, construire un système
+de synthèse pour le français conventionnel, écrit avec les règles de syntaxe usuelles est un problème déjà
+beaucoup plus simple que celui où l'on peut également utiliser les expressions issues des conversations
+SMS. Le problème deviendrait encore plus dicile si le texte d'entrée est écrit dans plusieurs langues. On
+voit donc l'importance de dénir dès le départ la langue et la syntaxe du langage acceptées par le système.
+Cependant, il ne s'agit pas de l'unique type de texte d'entrée. En 1979, [You79] introduit la synthèse
+à partir de concepts, on parle alors de synthèse Concept-to-Speech. Un concept est une entité particulière
+permettant de dénir une portion de phrase dont on sait qu'elle utilise une syntaxe particulière. Par
+exemple, pour demander au système de produire la phrase  Georges frappe le fer. , on va utiliser le
+concept (.FRAPPER, Georges, fer) où le verbe  FRAPPER  est une fonction à deux entrées prenant
+comme paramètres  Georges  et  fer . Dans la pratique cependant, les concepts (en tout cas les
+concepts complexes) restent diciles à générer. Voyons maintenant les autres caractéristiques générales
+
+2
+
+Fig. 1  Nomenclature générale d'un système de synthèse à partir du texte. Dans un tel système, le texte en entrée
+a son importance, il doit être écrit dans un langage et suivant une syntaxe reconnus par l'analyseur phonétique
+et prosodique du système. Ce dernier génère une transcription phonétique du texte accompagnée d'informations
+prosodiques. Une unité de traitements acoustiques utilise alors ces paramètres pour générer le signal vocal nal.
+d'un système de synthèse à partir du texte. En sortie, le système doit produire un signal sonore. Pour
+passer du texte d'entrée à cette onde sonore, le système doit (1) analyser le texte en entrée et le transformer
+en un jeu d'étiquettes et (2) utiliser un mécanisme utilisant cette information pour générer un signal
+sonore. Le point (1) est réalisé par un analyseur qui génère des données phonétiques (phonèmes) et
+prosodiques. Le point (2) est généralement ce qui varie en fonction des systèmes. Il s'agit dans tous les
+cas de traitements acoustiques eectués suivant l'information issue de (1).
+1.2 Les diérentes méthodes de synthèse
+
+Nous allons maintenant nous intéresser aux diérentes méthodes de synthèse vocale qui ont été utili-
+sées jusqu'à aujourd'hui. Nous nous concentrerons dans ce chapitre sur des principes, les mises en ÷vre
+
+ont bien sûr évoluées au l des avancées technologiques. Le chapitre suivant présentera les deux mé-
+thodes utilisées actuellement dans l'industrie et sur lesquelles portent l'essentiel des recherches, à savoir
+
+la synthèse par sélection d'unités et la synthèse par modèles de Markov cachés. La première approche,
+la synthèse articulatoire suit une hypothèse de production en cherchant à reproduire un comportement
+physiologique. La synthèse dite par règle et la synthèse par sélection d'unités se fondent quant à elles
+sur une hypothèse de production. Il s'agit de faire percevoir une parole humaine, avec des principes de
+réalisation diérents de ceux employés par l'homme.
+1.2.1 La synthèse articulatoire
+La première méthode qui fut testée pour produire articiellement de la parole est de reproduire le
+conduit vocal d'un être humain à l'aide d'éléments mécaniques. La machine de Von Kempelen suivait
+ce principe. Avec l'avènement de l'informatique, le calcul diérentiel et la mécanique des uides ont
+permis de modéliser le canal articulatoire plus formellement, mais sans résultat notable du point de vue
+de la qualité nale de la parole produite [Mer73]. Ces systèmes sourent de deux problèmes majeurs.
+D'une part, du fait du grand nombre de paramètres à prendre en compte pour reproduire un canal
+vocal valide, les concepteurs sont amenés à réaliser un grand nombre d'approximations qui nissent par
+donner une qualité de synthèse nale assez médiocre. D'autre part, les systèmes basés sur l'articulation
+engendrent beaucoup de calculs pour simuler le fonctionnement du conduit vocal. Ces inconvénients
+rendent ces systèmes pratiquement inutilisables en temps réel [Sto09]. Un exemple récent de synthèse de
+voix intelligible utilisant les techniques articulatoires est donné dans [Sto11].
+1.2.2 La synthèse par règles
+
+Le principe de la synthèse par règles est de savoir modéliser les diérents paramètres du signal pro-
+duit (historiquement les formants) à l'aide d'un ensemble de règles de production. Via ces règles, il s'agit
+
+principalement de savoir représenter les fréquences, les amplitudes et les bandes passantes des différents
+
+formants en fonction des contraintes du texte, notamment la coarticulation. Historiquement, un célèbre
+système de synthèse par règles, mis au point par D. Klatt est détaillé dans [Kla82]. D'une manière plus
+générale, une telle approche décrit des règles d'évolution des paramètres d'un modèle de génération du
+signal de parole. Les modèle du signal de parole font le plus souvent l'hypothèse d'une décomposition
+source/ltre, où l'onde de source, le signal à la hauteur du larynx, est convolué à un ltre (linéaire le plus
+souvent) caractérisant les modes de résonances du conduit vocal. Par rapport à l'approche précédente, ces
+
+systèmes reposent sur des modèles plus simples et non sur des contraintes complexes concernant l'écou-
+lement de l'air dans un milieu dynamique, permettant ainsi de simplier les calculs et donc d'obtenir
+
+un système temps réel ecace. L'inconvénient majeur de ce système est le timbre peu naturel des voix
+fabriquées, soulignant aisément leur caractère articiel.
+Historiquement les règles étaient des règles déterministes décrites par des systèmes experts. Il faut
+noter l'arrivée récente des systèmes de synthèse dits par HMM, qui nalement remettent ces idées à l'odre
+du jour en proposant des règles statistiques (on peut noter le système HTS). Des HMM sont d'abord appris
+sur un corpus d'apprentissage de manière à capturer la dynamique spectrale des événements sonores. Les
+HMM sont ensuite utilisés, à l'envers, comme générateur d'observations spectrales. Ces spectres articiels
+sont convertis en signal temporel par des modèles ad hoc. Le chapitre suivant présentera plus en détail
+ces nouveaux systèmes de synthèse.
+1.2.3 La synthèse par sélection et concaténation d'unités acoustiques
+La synthèse par sélection et concaténation d'unités acoustiques se base sur le principe de pioche dans
+un dictionnaire préenregistré d'unités phonétiques (de briques phonétiques élémentaires pourrait on dire)
+pour être concaténer en séquence. Le choix d'une unité acoustique dans le répertoire constitue l'une des
+
+principales problématiques de ces systèmes de synthèse. Les premiers systèmes, dans les années 50, utili-
+saient des phones [Har53]. Les cassures dans la prosodie et la coarticulation mal restituée, engendrées par
+
+la concaténation, [PLBS87] nuisent cependant très fortement à la qualité de ce type de synthèse. C'est
+ainsi que Küpfmüller et Warns dénissent une nouvelle unité acoustique en 1956, le diphone. Un diphone
+se dénit comme la deuxième moitié d'un phone et la première moitié du phone suivant. Le choix de
+couper au milieu des phones est lié au fait que les unités possèdent généralement un spectre plus stable à
+ce niveau, les pertes engendrées par la concaténation sont donc moins importantes que sur les transitions
+entre deux phonèmes. À la n de la synthèse, un algorithme (Pitch Synchronous OverLap Add method,
+ou PSOLA généralement) est utilisé pour modier la prosodie du signal de manière à coller au maximum
+aux consignes prosodiques déterminées par les traitements linguistiques.
+
+Le premier système de synthèse à base de diphones est dû à [EKMW64]. La synthèse par concaténa-
+tion de diphones est de bien meilleur qualité que la synthèse par concaténation de phones mais pas encore
+
+parfaite. D'autres unités ont donc été essayées, toujours plus longues : demi-syllabes [Fuj76], syllabe et
+disyllabe. D'autres tentatives ont été faites sur des unités sub-phonémiques : allophones, demi-allophones
+[Con99]. Il est important de noter les répercutions en terme de mémoire et de combinatoire induites par le
+choix d'une unité donnée : si une langue comporte, comme c'est le cas du Français, 35 phonèmes (donc 35
+phones à enregistrer), il y a théoriquement 352 diphones, 353 triphones, etc. Le problème est encore plus complexe si l'on a des unités multi-représentées (cf. paragraphe suivant), c'est-à-dire plusieurs instances d'une même unité acoustique.
+La vision de dictionnaire d'unités a beaucoup évolué au cours du temps. L'idée d'introduire plusieurs
+représentants d'une même unité (unités multi-représentées), motivée par les grandes diérences entre
+les unités selon leur contexte d'apparition, a entrainé le stockage des enregistrements sonores non plus
+dans un dictionnaire mais comme une longue séquence vocale annotée (marquage des débuts et ns de
+phones). Dans cette nouvelle perception des choses, on a un corpus de parole continue mais pas d'unité
+
+acoustique spéciquement dénie et découpée. L'unité n'apparaîtra qu'au moment ou l'on a besoin d'elle.
+C'est le principe de la synthèse par corpus (SPC). Il faudra alors, lorsque l'on a besoin d'une unité, savoir
+laquelle, dans le corpus, est la plus adaptée à son contexte souhaité lors de la synthèse. Cela implique
+de pénaliser les unités les moins adaptées, d'où la nécessité de dénir une notion de coût. C'est sur cette
+dernière évolution de la synthèse par sélection d'unités que porte notre stage.

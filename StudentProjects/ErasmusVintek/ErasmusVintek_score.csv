@@ -1,0 +1,5 @@
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+02_00, ErasmusVintek, ressources/StudentProjects/howto.txt, 0.55, false, true, false
+02_01, ErasmusVintek, ressources/StudentProjects/GameOfLife.java, 0.45, false, true, false
+02_02, ErasmusVintek, ressources/StudentProjects/ErasmusVintek_score.csv, 0.58, false, true, false
+02_03, ErasmusVintek, ressources/StudentProjects/rapport.txt, 0.5, false, true, false

@@ -1,0 +1,383 @@
+
+			Rapport de projet NabuTalk
+	Réalisation d'un agent conversationnel pour le site de l'ENSSAT
+
+				Matt Senex
+
+				21 octobre 2013
+
+Introduction
+
+Le présent rapport rend compte du travail que nous avons réalisé sur le projet d'agent
+conversationnel pour le site principal de l'ENSSAT. Le but de ce projet est de réaliser un agent
+automatique capable de répondre de manière textuelle à une question d'un utilisateur. Le champ de
+questions auquel l'agent doit être capable de répondre se limite à quatre sujets, pour lesquels les
+principales questions doivent être prises en compte : L'ENSSAT en général, les modalités
+d'admission, et les formations LSI et IMR offertes par l'ENSSAT.
+Le présent rapport, dont l'objectif est de présenter la réponse technique, réalisée à l'aide du langage
+NabuTalk, apportée à ce problème. Notre compte rendu se découpera donc en trois parties. D'abord,
+nous présenterons la manière dont nous avons implémenté le jeu de questions/réponses demandé
+dans le cahier des charges. Ensuite, nous détaillerons le fonctionnement de « notre tunnel
+d'acquisition des paramètres », système par lequel nous tâchons de récupérer deux paramètres
+essentiels pour guider au mieux l'utilisateur. Enfin, la méthode de récupération de l'adresse mail de
+l'utilisateur - nécessaire pour lui envoyer des informations supplémentaires - sera détaillée dans la
+dernière partie.
+
+1. Questions/réponses
+Dans cette première partie, nous détaillons l'implémentation du jeu de questions/réponses demandé
+dans le cahier des charges de l'application. Il est basé sur les quatre sujets suivants : l'ENSSAT,
+l'admission, la formation LSI et la formation IMR.
+1.1 Partie ENSSAT
+Le premier type de questions que peut poser l'utilisateur est aussi le plus général : Il s'agit de
+questions sur l'école elle-même. Trois types de questions sont renseignées par l'agent. D'abord, les
+questions générales sur l'ENSSAT, les questions sur l'habilitation de l'ENSSAT et enfin celles
+portant sur les différentes formations de l'ENSSAT.
+Ces différentes questions de l'utilisateur sont tout d'abord reconnues à l'aide de plusieurs modèles de
+langage :
+
+(nlu-resource [id:con_specialites]
+alt({
+
+alt({[quel] [sont]} {[c-est] [quoi]})
+alt([specialite] [formation] "filieres" "filières" "cycles d'etude"
+
+"cycles d'étude")
+
+optional([enssat])}
+
+)
+)
+(nlu-resource [id:con_certifiee]
+{ optional([est-ce-que])
+optional(alt([enssat] [ecole]))
+alt([est] {[a] [ete]} {[a] [elle] [ete]})
+alt(#certifiee# #certifiée# #habilitee# #habilitée#)
+optional({[par] alt("CTI" "cti" [organisme] {"comission" [au] [titre]
+
+[ingenieur]})})}
+)
+
+Ces modèles (entre autres) sont utilisés par les dialogue-units : what-is(enssat) (pour répondre aux
+questions du type « Qu'est-ce que l'ENSSAT »), which-specialite(enssat) (pour répondre aux
+questions sur les différentes filières à l'ENSSAT), is-certified(enssat) (pour répondre à des
+questions du type « L'ENSSAT est elle certifiée ? »).
+Enfin, le dialogue-unit , déjà implémenté avec le code source de départ, répond aux questions sur la
+localisation géographique de l'ENSSAT.
+Jeux de tests :
+
+101) User : Qu'est-ce que l'ENSSAT ?
+Agent : L'ENSSAT est l'Ecole Nationale [...] et des technologies emergentes. Avez-vous une autre question ?
+102) User : L'école est elle certifiée ?
+Agent : L'ENSSAT est habilitee par [...] de qualite EUR-ACE. En quoi puis-je vous aider ?
+103) User : Quelles sont les spécialités à l'ENSSAT ?
+Agent : L'ENSSAT possède quatre filières : EII pour Electronique et Informatique Industrielle, OPT pour Optronique et
+les deux formations en informatique [...] et Reseaux).
+104) User : Où se situe l'ENSSAT ?
+Agent : L'ENSSAT est à <a href="http://www.ville-lannion.fr">Lannion</a> dans les Côtes d'Armor. Avez-vous une
+autre question ?
+
+1.2 Partie Admission
+L'utilisateur peut poser des questions concernant l'admission à l'Enssat. Nous avons défini avec des
+modèles les différents types de formulations possibles des questions, puis des dialogue unit ont été
+défini pour capter les questions correspondant à des modèles et proposer la réponse adéquate.
+Questions du type : comment faire pour intégrer l'enssat ?
+
+Définition du modèle de questions :
+(nlu-resource [id:question_integrer_enssat]
+{alt([comment]) optional("faire pour") optional([syn_puis-je] ) alt( "integrer"
+"entrer" "postuler") {optional( " a " ) " l'enssat "} }
+)
+(nlu-resource [id:question_integrer_enssat_apres]
+{alt([syn_puis-je]) optional(alt("de" "d'")) alt("faire " alt( "integrer" "entrer"
+"postuler")) {optional( " a " ) " l'enssat "} alt([avec] [apres]) alt([un] [une])
+alt("classe prepa" "classe preparatoire" "dut" "iut" "bts") }
+)
+(nlu-resource [id:question_quelles_formations]
+{ alt("quelles" "quels") alt("formations" "cursus") "permettent" alt("de" "d'")
+alt("faire " alt( "integrer" "entrer" "postuler")) {optional( " a " ) " l'enssat "} }
+)
+Jeux de tests :
+User : comment faire pour intégrer l'enssat ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII, DUT Informatique, DUT Reseaux et Telecommunications, DUT Mesures
+Physiques, Licence 2-3 Informatique, BTS Photonique et autres. Il est possible d'integrer l'enssat en 2e annee sur dossier
+pour les titulaires d'une premiere annee de master (M1) ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : comment puis je intégrer l'enssat ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII, [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : comment faire pour entrer à l'enssat ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII, [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : est ce que je peux integrer l'enssat avec un dut ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : est ce possible d'entrer à l'enssat après un bts ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+c'est possible de postuler à l'enssat après une classe prépa ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : quelles formations permettent d'intégrer l'enssat ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : quels cursus permettent de faire l'enssat ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+
+Questions concernant les contacts pour l'admission
+Définition du modèle de questions :
+(nlu-resource [id:question_contact_admission]
+
+{ optional("a") alt("qui") alt("doit-on" "peut-on") alt("contacter" "s'adresser")
+alt("pour" "a propos") alt("les" "l'" "des") alt("inscriptions" "inscription"
+"dossiers" "documents" "demarches") optional(alt("administratives" "administratifs"
+"d'admission")) }
+)
+Jeux de tests :
+User : a qui doit-on s'adresser pour les dossiers d'admission ?
+Agent : Catherine Delen, telephone: 02 96 46 90 60, email: secretariat.concours que puis-je pour vous ?
+User : qui peut-on contacter a propos des demarches administratives ?
+Agent : Catherine Delen, telephone: 02 96 46 90 60, email: secretariat.concours que puis-je pour vous ?
+Questions concernant les modalités d'inscription
+Définition du modèle de questions :
+(nlu-resource [id:modalites_admission]
+{ alt("quelles") alt("sont") alt("les modalites") alt("d' ") alt("inscription"
+"admission") optional({"en" alt("premiere" "1ere") "annee"})}
+)
+(nlu-resource [id:modalites_admission_date]
+{ alt("quelles") alt("sont") alt("les dates") optional("limites") alt("d' " "du"
+"des") optional("jury") optional("d'") alt("inscription" "admission" "concours")
+optional({"en" alt("premiere" "1ere") "annee"})}
+)
+Jeux de tests :
+User : quelles sont les modalites d'inscription ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les modalites d'admission en 1ere annee ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates limites d'inscription ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates des concours ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates du jury d'admission ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+
+1.3 Partie LSI
+Notre agent conversationnel est capable de répondre à trois types de questions sur la filière LSI :
+{ optional("a") alt("qui") alt("doit-on" "peut-on") alt("contacter" "s'adresser")
+alt("pour" "a propos") alt("les" "l'" "des") alt("inscriptions" "inscription"
+"dossiers" "documents" "demarches") optional(alt("administratives" "administratifs"
+"d'admission")) }
+)
+Jeux de tests :
+User : a qui doit-on s'adresser pour les dossiers d'admission ?
+Agent : Catherine Delen, telephone: 02 96 46 90 60, email: secretariat.concours que puis-je pour vous ?
+User : qui peut-on contacter a propos des demarches administratives ?
+Agent : Catherine Delen, telephone: 02 96 46 90 60, email: secretariat.concours que puis-je pour vous ?
+Questions concernant les modalités d'inscription
+Définition du modèle de questions :
+(nlu-resource [id:modalites_admission]
+{ alt("quelles") alt("sont") alt("les modalites") alt("d' ") alt("inscription"
+"admission") optional({"en" alt("premiere" "1ere") "annee"})}
+)
+(nlu-resource [id:modalites_admission_date]
+{ alt("quelles") alt("sont") alt("les dates") optional("limites") alt("d' " "du"
+"des") optional("jury") optional("d'") alt("inscription" "admission" "concours")
+optional({"en" alt("premiere" "1ere") "annee"})}
+)
+Jeux de tests :
+User : quelles sont les modalites d'inscription ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les modalites d'admission en 1ere annee ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates limites d'inscription ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates des concours ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates du jury d'admission ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+
+1.3 Partie LSI
+Notre agent conversationnel est capable de répondre à trois types de questions sur la filière LSI :
+
+1.4 Partie IMR
+La gestion des réponses aux questions portant sur la filière IMR est identique à celle effectuée pour
+la partie LSI. Ainsi, on y retrouve une réponse aux questions du type « Qu'est-ce que la formation
+IMR ? » ou « Quels sont les contenus de la formation IMR ? ». Comme dit précédemment, les
+
+questions du type « Qu'est-ce que la compétence secondaire ? » sont traitées dans un même dialog-
+unit, avec une réponse générale. Pour plus de détail, se reporter à la section 1.3 « Partie LSI » ou au
+
+code.
+
+2. Tunnel d'acquisition
+Dans la première partie, nous avons défini des unités de dialogue simples apportant des réponses à
+une question explicite de l'utilisateur. Pour proposer des informations plus pertinentes à l'utilisateur,
+il faut disposer de renseignements sur l'utilisateur. Dans notre cas, il s'agit 1) de la formation
+ENSSAT qui intéresse l'utilisateur s'il y en a une et 2) du type de formation dont vient l'utilisateur.
+Pour ce faire, un surcroit de spécification s'impose. L'information « formation souhaitée » est une
+variable pouvant prendre trois valeurs : ''LSI'', ''IMR'' ou ''AUCUN''. L'information « Formation
+antérieure » peut elle prendre valeurs : ''CPGE'', ''DUT'', ''BTS'' ou ''AUTRE''.
+L'acquisition de ces paramètres peut se faire de deux manières différentes :
+1. Spontanément : L'utilisateur fournit les informations sans demande de notre agent. Il suffit
+alors de les récupérer.
+2. En cas de question explicite de l'utilisateur sur une formation. L'agent demande alors à
+l'utilisateur les informations qui lui manquent.
+Pour le cas spontané, trois sous-cas sont possibles, selon que l'utilisateur entre l'une ou l'autre des
+informations ou les deux en même temps. Cela conduit à trois dialog-units :
+– Un pour le cas où l'utilisateur donne sa formation préférée cas (1)
+– Un où l'utilisateur donne sa provenance cas (2)
+– Un où il fournit d'abord sa provenance puis sa formation préférée ou l'inverse cas (3)
+Voici les trois dialog-units qui initient ce dialogue :
+
+dialogue-unit[
+id:spontane(formation)
+input: {optional([provenance]) [formation($f)]}
+effect:{
+(u-formationAnterieure $f)
+goto(from-formation($f))
+}
+]
+dialogue-unit[
+id:spontane(interet)
+input: [interet($i)]
+output: "Heureux de l'apprendre,"
+effect:{
+(u-interetMarque $i)
+
+goto(noter-interet($i))
+
+}
+]
+dialogue-unit[
+id:spontane-supreme
+input: alt({optional([provenance]) [formation($f)] [et] [interet($i)]}
+{[interet($i)] [et] optional([provenance]) [formation($f)]}
+)
+output: "J'en prends note."
+effect:{
+
+(u-interetMarque $i)
+(u-formationAnterieure $f)
+goto(from-formation($f))
+}
+]
+Dans les cas 2 et 3, on redirige ensuite vers un dialog-unit spécifique à la provenance (ou formation
+antérieure) de l'interlocuteur. Voici, l'un de ces dialog-units, dédié aux utilisateurs venant de classes
+préparatoires :
+dialogue-unit[
+id:from-formation(CPGE)
+output:{"Dans ce cas, pour aller en LSI, vous devrez suivre un semestre général
+vous permettant de voir ce qui se fait à l'ENSSAT en informatique, électronique et
+optronique. A l'issue de ce semestre, vous pourrez choisir la formation LSI. Veuillez
+noter que vous ne pouvez pas aller en IMR avec cette formation."}
+]
+Dans le cas 1, en revanche, on en prend simplement note en proposant un complément
+d'informations sur la formation envisagée, c'est le rôle des dialog-units noter-interet($x) :
+
+dialogue-unit[
+id:noter-interet(lsi)
+output:"je peux peut-être vous renseigner plus en detail sur cette formation ?"
+next:{
+dialogue-unit[
+input:{alt([con_yes] [con_agree])}
+goto:what-is(lsi)
+]
+
+dialogue-unit[
+input:alt([con_i-dont-know] [con_none] [con_it-doesnt-matter]
+
+[con_no] [con_disagree])
+
+output:"d'accord, je vous laisse naviguer sur le site."
+]
+
+}
+]
+Jeux de tests :
+101) User : Je viens de DUT et je veux aller en LSI
+Agent : J'en prends note. Avec cette [...] qu'apprenti-ingénieur. En quoi puis-je vous aider ?
+101) User : Je veux aller en LSI et je viens de prepa
+Agent : J'en prends note. Dans ce cas [...] Veuillez noter que vous ne pouvez pas aller en IMR avec cette formation. En
+quoi puis-je vous aider ?
+101) User : Je veux aller en LSI
+Agent : Heureux de l'apprendre, je peux peut-être vous renseigner plus en detail sur cette formation ?
+102) User : Oui
+Agent : La filiere LSI est un cycle de trois ans specialise dans le [...] communicants et mobiles.
+101) User : J'ai fait un BTS
+Agent : Avec cette formation, vous pouvez aller en IMR ou en LSI. L'admission se fait sur dossier. En IMR, il faut en
+plus trouver une entreprise prête à vous embaucher en tant qu'apprenti-ingénieur.
+
+L'autre façon de recueillir ces paramètres est sur une question de l'utilisateur. Ainsi, plusieurs
+
+dialog-units, gérant des questions du genre « Qu'est-ce que IMR ? » redirigent vers des dialogue-
+units d'acquisition comme acquisition-specialite-lsi ou acquisition-specialite-imr qui se
+
+chargent de recueillir la spécialité qui intéresse l'interlocuteur. Un exemple de tel dialogue-unit est
+le suivant :
+dialogue-unit[
+id:acquisition-specialite-lsi
+category:lsi
+output:"La formation LSI est-elle celle qui vous interesse le plus ?"
+next:{
+dialogue-unit[
+
+id:specialite-preferee
+input:alt([con_yes] [con_agree])
+effect:{(u-interetMarque "LSI")} // Noter l'interet
+output:"D'accord, je note que vous souhaitez aller en"
+goto:afficherInteret()
+]
+dialogue-unit[
+input:alt([con_no] [con_disagree] [specialite(IMR)])
+effect:{(u-interetMarque "IMR")}
+output:"d'accord, je note que vous souhaitez aller en"
+goto:afficherInteret()
+]
+dialogue-unit[
+input:alt([con_it-doesnt-matter] [con_i-dont-know] [con_none])
+effect:{(u-interetMarque "AUCUN")}
+output:"d'accord, je vous laisse naviguer sur le site."
+]
+dialogue-unit[
+input:alt([con_no] [con_disagree])
+output:"d'accord, je vous laisse naviguer sur le site."
+]
+}
+]
+On voit que, à l'issue du traitement, on utilise le dialogue-unit afficherInteret() pour afficher le
+contenu de la variable u-interetMarque dans laquelle on a enregistré la formation qui intéresse
+l'utilisateur. Ce dialogue-unit a une autre fonction : rediriger vers le dialogue-unit
+demanderFormationAnterieure() qui se charge de recueillir auprès de l'utilisateur la formation avec
+laquelle il souhaite postuler pour entrer à l'ENSSAT. Cette deuxième information est recuillie dans
+la variable u-formationAnterieure.
+Une autre méthode à également été implémentée pour recuillir la formation qui intéresse
+l'interlocuteur : une demande est faite lors d'un passage dans le dialogue-unit relance(lsi-imr).
+Comme celui-ci est commun aux deux formations, la demande est générale et traité dans le
+dialogue-unit prendreSpecialite().
+Ce tunnel d'acquisition a également nécessité la rédaction de modèles de langages particuliers,
+relatifs aux formations antérieures et aux marques d'intérêt pour une filière.
+
+Conclusion
+Le travail présenté ici couvre l'essentiel des demandes du cahier des charges, sans bug connu sur ces
+fonctionnalités. Il est cependant important de noter que même si nous avons cherché à couvrir le
+plus grand nombre de formulations possibles d'une même question de l'utilisateur, il est illusoire de
+espérer obtenir une couverture totale de l'éventail des différentes formulations en langage naturel.
+
+Ainsi, les améliorations possibles de notre travail pourraient se faire sur plusieurs points. D'abord,
+on pourrait tenter d'obtenir une plus large couverture de formulations pour les questions/réponses
+implémentées. Il est également possible d'implémenter plus de questions/réponses et de développer
+les capacités de dialogue contextuel (questions faisant références aux réponses antérieures dans le
+dialogue) de notre automate, assez pauvre en la matière pour l'instant. Nous regrettons également de
+ne pas avoir réussi à déployer correctement l'application sur le serveur « bac à sable » de Dialonics
+(tentative avec XX = 44 ).
+

@@ -1,0 +1,3 @@
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+05_00, Boby, ressources/StudentProjects/Boby_score.csv, 0.28, false, true, false
+05_01, Boby, ressources/StudentProjects/Report.txt, 0.52, false, true, false

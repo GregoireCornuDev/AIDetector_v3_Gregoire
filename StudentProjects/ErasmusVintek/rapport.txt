@@ -1,0 +1,78 @@
+Rapport de projet
+Le jeu GameOfLife
+
+Erasmus Vintek
+30 octobre 2013
+
+1. Introduction
+
+Le jeu Game of Life, également connu sous le nom de "vie", est un automate cellulaire imaginé par le mathématicien britannique John Horton Conway en 1970. Bien que ses règles soient simples, le jeu peut générer des motifs complexes et fascinants. Dans ce document, nous allons explorer le jeu Game of Life, présenter ses règles, mettre en œuvre une version en Java et effectuer des tests pour illustrer son fonctionnement.
+2. Présentation du jeu
+
+Le jeu Game of Life se déroule sur une grille bidimensionnelle infinie de cellules carrées. Chaque cellule peut être dans l'un des deux états : vivante ou morte. À chaque étape, l'état de chaque cellule est déterminé par un ensemble de règles simples :
+
+    Une cellule morte ayant exactement 3 voisines vivantes devient vivante (naissance).
+    Une cellule vivante ayant moins de 2 voisines vivantes meurt (sous-population).
+    Une cellule vivante ayant 2 ou 3 voisines vivantes reste vivante.
+    Une cellule vivante ayant plus de 3 voisines vivantes meurt (surpeuplement).
+
+Ces règles simples engendrent des motifs dynamiques et imprévisibles, permettant aux joueurs d'observer l'évolution et l'émergence de structures complexes dans la grille.
+3. Implémentation en Java
+
+Nous allons maintenant implémenter le jeu Game of Life en Java en utilisant une représentation de la grille à l'aide d'un tableau bidimensionnel. Nous créerons une classe GameOfLife qui gérera la logique du jeu, l'initialisation de la grille, et les règles de transition entre les générations successives.
+
+java
+
+// Implémentation en Java du jeu Game of Life
+public class GameOfLife {
+    private int[][] grid;
+    private int rows;
+    private int cols;
+
+    public GameOfLife(int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
+        this.grid = new int[rows][cols];
+        initializeGrid();
+    }
+
+    private void initializeGrid() {
+        // Initialiser la grille avec des cellules vivantes ou mortes
+        // selon un motif prédéfini ou aléatoire
+    }
+
+    public void nextGeneration() {
+        // Calculer la prochaine génération en appliquant les règles du jeu
+    }
+
+    public void displayGrid() {
+        // Afficher la grille à l'écran
+    }
+
+    // Autres méthodes pour manipuler la grille, etc.
+}
+
+4. Test
+
+Pour tester notre implémentation, nous pouvons créer une instance de la classe GameOfLife avec une grille initiale spécifique, puis simuler plusieurs générations successives pour observer l'évolution de la grille.
+
+java
+
+// Test de l'implémentation du jeu Game of Life
+public class GameOfLifeTest {
+    public static void main(String[] args) {
+        GameOfLife game = new GameOfLife(10, 10);
+        game.displayGrid();
+        
+        for (int i = 0; i < 10; i++) {
+            game.nextGeneration();
+            game.displayGrid();
+        }
+    }
+}
+
+5. Conclusion
+
+Le jeu Game of Life est un exemple fascinant d'un système dynamique simple mais complexe. Bien que ses règles soient basiques, il peut générer des configurations complexes et imprévisibles. L'implémentation en Java que nous avons réalisée démontre la simplicité de modéliser et de simuler des systèmes cellulaires dans un environnement de programmation. Ce jeu reste toujours un sujet d'étude populaire dans les domaines des mathématiques, de la biologie et de l'informatique. En tant que tel, il continue d'attirer l'intérêt des chercheurs et des amateurs de jeux.
+
+J'ai beaucoup apprécié ce projet mais c'était très dur et cela m'a pris beaucoup de temps. 

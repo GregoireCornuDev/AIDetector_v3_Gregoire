@@ -1,0 +1,6 @@
+<dependency>
+    <groupId>org.languagetool</groupId>
+    <artifactId>language-tool-core</artifactId>
+    <version>5.4</version> <!-- ou la dernière version disponible -->
+</dependency>
+

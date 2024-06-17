@@ -1,0 +1,28 @@
+Rapport TDI
+
+I - Structure de la TDI
+La TDI (Table Des Identificateurs) est une structure de données permettant d’enregistrer des éléments clefs nécessaires au cours du processus de compilation.
+La TDI permet de stocker des informations concernant les classes, les attributs, les méthodes,  les variables locales et globales.
+
+Un certain nombre de méthodes sont disponibles afin d’ajouter, modifier et supprimer des éléments dans la table des identifcateurs. Cependant nous ne pouvons accéder au code sources de ces méthodes (seul un point jar nous est fourni) et nous devons donc nous baser sur la documentation fournie.
+
+Une instanciation de la TDI est réalisée dans la classe PointGénération. Il s’agit en fait de la variable l qui est de type PListeGen et qui est en fait une référence sur la TDI.
+C’est au cours de ces différents points de génération que les principaux accès à la TDI vont être effectués.
+II - Appel des éléments de la TDI (ou système d’adressage particulier)
+Chaque élément présent dans la TDI est adressé de deux manières différentes :
+manière symbolique, c’est-à-dire par son identificateur,
+manière absolue, c’est-à-dire par son adresse statique. Le terme adresse statique fait référence au numéro d’ordre de la méthode dans l’expansion de la classe considérée.
+La dimension de l’adressage dépend de la nature des éléments appelés.
+
+Pour les classes et les variables globales, un espace à une dimension est suffisant pour repérer les éléments (voir ligne rouge sur la figure).
+
+Les attributs et les méthodes virtuelles d’une classe sont repérés dans un espace à deux dimensions avec une dimension représentant les classes (voir plan bleu sur la figure).
+
+Les paramètres et les variables locale des méthodes virtuelles dépendent d’une classe particulière et d’une méthode particulière. C’est pour cela que nous utilisons un repérage à trois dimensions (voir cube vert sur la figure).
+
+III - Exemple d’utilisation de la TDI
+La table des identificateurs doit être utilisée, par exemple, pour vérifier la validité des identificateurs. 
+Par exemple la compilation des instructions de création d’une classe nécessite la vérification qu’une telle classe (avec le même nom) n’est pas déjà enregistrée dans la TDI.
+De même, lors de la création d’une classe donnant lieu à un héritage, il convient de vérifier que la classe mère est bien renseignée au sein de la TDI.
+
+

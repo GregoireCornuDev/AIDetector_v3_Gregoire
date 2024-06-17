@@ -1,0 +1,4 @@
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+03_00, MattSenex, ressources/StudentProjects/rapport_senex.txt, 0.5, false, true, false
+03_01, MattSenex, ressources/StudentProjects/intro.code, 0.38, false, true, false
+03_02, MattSenex, ressources/StudentProjects/MattSenex_score.csv, 0.64, false, true, false

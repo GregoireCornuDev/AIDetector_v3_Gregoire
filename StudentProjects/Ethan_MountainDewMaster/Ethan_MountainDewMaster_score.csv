@@ -1,0 +1,4 @@
+Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+04_00, Ethan_MountainDewMaster, ressources/StudentProjects/truc_super_long.py, 0.55, false, true, false
+04_01, Ethan_MountainDewMaster, ressources/StudentProjects/Ethan_MountainDewMaster_score.csv, 0.46, false, true, false
+04_02, Ethan_MountainDewMaster, ressources/StudentProjects/super_script.py, 0.51, false, true, false

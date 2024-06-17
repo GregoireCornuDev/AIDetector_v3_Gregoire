@@ -1,0 +1,11 @@
+1. install JavaFx
+
+sudo apt install openjfx
+
+2. compile with the right options
+
+javac GameOfLife.java --module-path /usr/share/openjfx/lib --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web
+
+3. run with the right options
+
+java GameOfLife --module-path /usr/share/openjfx/lib --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web

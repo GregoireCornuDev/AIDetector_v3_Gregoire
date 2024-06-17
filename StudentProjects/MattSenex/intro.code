@@ -1,0 +1,21 @@
+(nlu-resource [id:con_specialites]
+alt({
+
+alt({[quel] [sont]} {[c-est] [quoi]})
+alt([specialite] [formation] "filieres" "filières" "cycles d'etude"
+
+"cycles d'étude")
+
+optional([enssat])}
+
+)
+)
+(nlu-resource [id:con_certifiee]
+{ optional([est-ce-que])
+optional(alt([enssat] [ecole]))
+alt([est] {[a] [ete]} {[a] [elle] [ete]})
+alt(#certifiee# #certifiée# #habilitee# #habilitée#)
+optional({[par] alt("CTI" "cti" [organisme] {"comission" [au] [titre]
+
+[ingenieur]})})}
+)
