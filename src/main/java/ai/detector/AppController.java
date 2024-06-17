@@ -12,7 +12,10 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
+
+import static ai.detector.DevoreurIO.chargerProjet;
 
 public class AppController {
     @FXML private ListView<Projet> listeProjets;
@@ -22,6 +25,11 @@ public class AppController {
     @FXML private TextField typeFichierField;
     @FXML private TextField scoreIAField;
     @FXML private Button btnCharger;
+    @FXML private Button btnReanalyser;
+    @FXML private Button btnAjouterProjet;
+    @FXML private Button btnSupprimerProjet;
+    @FXML private Button btnSauvegarderCSV;
+    @FXML private Button btnChargerCSV;
 
 
 
@@ -38,12 +46,27 @@ public class AppController {
                 }
             });
 
-            //TODO: Ajouter le listener pour les fichiers aussi
-            // et maj les détails avec la bonne fct.
+            // Ajoute un listener pour listeFichiers
+            listeFichiers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    updateFileDetails(newValue);
+                }
+            });
+
         }
 
-        // Ajout d'un listener sur le bouton
+        // Ajout d'un listener sur le bouton 'Charger'
         btnCharger.setOnAction(event -> chargerDepuisDossier());
+
+        // Ajout d'un listener sur le bouton 'Réanalyser'
+        btnReanalyser.setOnAction(event -> analyserFichier());
+
+        // Ajout d'un listener sur le bouton 'Ajouter Projet'
+        btnAjouterProjet.setOnAction(event -> ajouterProjet());
+
+        // Ajout d'un listener sur le bouton 'Supprimer Projet'
+        btnSupprimerProjet.setOnAction(event -> supprimerProjet());
+
 
     }
 
@@ -60,13 +83,14 @@ public class AppController {
                 // Affichage des noms des projets
                 System.out.println("Liste des projets chargés :");
                 for (Projet projet : projets) {
-                    System.out.println("- " + projet.getNom()); // Supposant que tu aies une méthode getNom() dans la classe Projet
+                    System.out.println("- " + projet.getNom());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
 
     @FXML
     private void chargerDepuisCSV() {
@@ -97,9 +121,15 @@ public class AppController {
 
     @FXML
     private void ajouterProjet() {
-        // Heu, cé bien ça ki faut faire non ?
-        Projet newProjet = new Projet("Nouveau Projet");
-        projets.add(newProjet);
+
+        // Ouvre une boite de dialogue pour sélectionner un dossier
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(null);
+
+        // Charge le projet correspondant au chemin du dossier
+        Projet projet = chargerProjet(selectedDirectory.toPath());
+        projets.add(projet);
+
     }
 
     @FXML
@@ -109,6 +139,8 @@ public class AppController {
             projets.remove(selectedProjet);
         }
     }
+
+
 
     @FXML
     private void analyserFichier() {
@@ -121,10 +153,16 @@ public class AppController {
 
     private void updateFileDetails(FichierProjet fichier) {
         nomFichierField.setText(fichier.getNom());
-        // Ajouter chemin dans le bon text field
-        // typeFichierField.setText(fichier .getType());
+        nomFichierField.setEditable(false); // Non éditable
+
+        cheminFichierField.setText(fichier.getChemin());
+        cheminFichierField.setEditable(false); // Non éditable
+
+        typeFichierField.setText(fichier.getType());
+        typeFichierField.setEditable(false); // Non éditable
+
         scoreIAField.setText(String.valueOf(fichier.getScoreIA()));
+        scoreIAField.setEditable(false); // Non éditable
     }
 
-    @FXML private Label debugLabel;
 }

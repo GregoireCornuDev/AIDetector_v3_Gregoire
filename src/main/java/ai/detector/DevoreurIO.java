@@ -34,22 +34,37 @@ public class DevoreurIO {
     public static List<Projet> chargerProjetsDepuisDossier(String dossierRacine) throws IOException {
         List<Projet> projets = new ArrayList<>();
         Files.list(Paths.get(dossierRacine)).filter(Files::isDirectory).forEach(dir -> {
-            Projet projet = new Projet(dir.getFileName().toString());
-            try {
-                Files.walk(dir).filter(Files::isRegularFile).forEach(file -> {
-                    try {
-                        String content = new String(Files.readAllBytes(file));
-                        FichierProjet fichierProjet = new FichierProjet(file.getFileName().toString(), file.toString(), content);
-                        projet.addFichier(fichierProjet);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            // Charge le projet à partir de son chemin
+            Projet projet = chargerProjet(dir);
+            // Ajoute le projet à la liste des projets
             projets.add(projet);
         });
         return projets;
     }
+
+    /**
+     * Charge un projet à partir de son chemin
+     * @param dir : le chemin du projet
+     * @return le projet
+     */
+    public static Projet chargerProjet(Path dir) {
+
+        Projet projet = new Projet(dir.getFileName().toString());
+        try {
+            Files.walk(dir).filter(Files::isRegularFile).forEach(file -> {
+                try {
+                    String content = new String(Files.readAllBytes(file));
+                    FichierProjet fichierProjet = new FichierProjet(file.getFileName().toString(), file.toString(), content);
+                    projet.addFichier(fichierProjet);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return projet;
+    }
+
 }
