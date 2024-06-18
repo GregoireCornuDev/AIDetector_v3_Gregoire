@@ -11,7 +11,7 @@ public class App extends Application {
         System.out.println("Starting application...");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("app.fxml"));
         Scene scene = new Scene(loader.load());
-        primaryStage.setTitle("AI Detector Mark 2.0");
+        primaryStage.setTitle("AI Detector Mark 3.0");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

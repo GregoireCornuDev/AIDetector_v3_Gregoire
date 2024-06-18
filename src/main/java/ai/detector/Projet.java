@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Projet {
     private String nom;
-    //private String auteur = "Inconnu";
+    //private String auteur = "Inconnu"; Cette variable de classe n'est plus utilisée
     private List<FichierProjet> fichiers = new ArrayList<>();
 
     public Projet(String nom) {
@@ -31,7 +31,6 @@ public class Projet {
     public String toString() {
         return nom;
     }
-    
-    //TODO Une methode qui exporte les infos ? 
+
 }
 

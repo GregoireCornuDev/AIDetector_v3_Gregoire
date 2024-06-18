@@ -54,37 +54,31 @@
          <children>
           <MenuBar id="menu-barre" prefHeight="27.0" prefWidth="204.0">
             <menus>
-              <Menu id="menu-file" mnemonicParsing="false" text="File">
+              <Menu id="menu-file" mnemonicParsing="false" text="Fichier">
                 <items>
-                  <MenuItem mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Open…" />
-                  <Menu mnemonicParsing="false" text="Open Recent" />
+                  <MenuItem fx:id="menuItemNouveau" mnemonicParsing="false" text="Nouveau" />
+                  <Menu mnemonicParsing="false" text="Open Recent" disable="true" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Save As…" />
-                  <MenuItem mnemonicParsing="false" text="Revert" />
+                  <MenuItem fx:id="menuItemPreference" mnemonicParsing="false" text="Preferences…" disable="true" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Preferences…" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
+                  <MenuItem fx:id="menuItemQuitter"  mnemonicParsing="false" text="Quitter" />
                 </items>
               </Menu>
-              <Menu id="menu-edit" mnemonicParsing="false" text="Edit">
+              <Menu id="menu-edit" mnemonicParsing="false" text="Editer" >
                 <items>
-                  <MenuItem mnemonicParsing="false" text="Undo" />
-                  <MenuItem mnemonicParsing="false" text="Redo" />
+                  <MenuItem mnemonicParsing="false" text="Annuler" disable="true" />
+                  <MenuItem mnemonicParsing="false" text="Rétablir" disable="true" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Cut" />
-                  <MenuItem mnemonicParsing="false" text="Copy" />
-                  <MenuItem mnemonicParsing="false" text="Paste" />
-                  <MenuItem mnemonicParsing="false" text="Delete" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Select All" />
-                  <MenuItem mnemonicParsing="false" text="Unselect All" />
+                  <MenuItem mnemonicParsing="false" text="Couper" disable="true" />
+                  <MenuItem mnemonicParsing="false" text="Copier" disable="true" />
+                  <MenuItem mnemonicParsing="false" text="Coller" disable="true" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer" disable="true" />
+                  <SeparatorMenuItem mnemonicParsing="false" disable="true" />
+                  <MenuItem mnemonicParsing="false" text="Sélectionner tout" disable="true" />
+                  <MenuItem mnemonicParsing="false" text="Désélectionner tout" disable="true"/>
                 </items>
               </Menu>
-              <Menu id="menu-help" mnemonicParsing="false" text="Help">
+              <Menu id="menu-help" mnemonicParsing="false" text="Aide">
                 <items>
                   <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
                 </items>

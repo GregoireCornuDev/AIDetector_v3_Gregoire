@@ -1,7 +1,6 @@
 package ai.detector;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-//mport com.opencsv.exceptions.CsvValidationException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class DevoreurIO {
         //try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(chemin), StandardCharsets.UTF_8)) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(chemin))) {
             // Écrire l'en-tête
-            writer.write("Projet,NomFichier,Chemin,Type,ScoreIA\n");
+            writer.write("Projet, NomFichier, Chemin, Texte\n");
 
             for (Projet projet : projets) {
                 // Ecrit les informations des fichiers pour chaque projet
@@ -31,10 +30,10 @@ public class DevoreurIO {
                     String projetNom = projet.getNom();
                     String fichierNom = fichier.getNom();
                     String fichierChemin = fichier.getChemin();
-                    String fichierTexte = fichier.getTexte();
+                    String fichierTexte = escapeCSV(fichier.getTexte());
 
                     // Ajoute une ligne au CSV
-                    writer.write(projetNom + "," + fichierNom + "," + fichierChemin + "," + fichierTexte + "<fin-texte>");
+                    writer.write(projetNom + ", " + fichierNom + ", " + fichierChemin + ", " + fichierTexte + "\n");
                 }
             }
         }
@@ -46,34 +45,20 @@ public class DevoreurIO {
      * @return : Retourne la liste des projets
      * @throws IOException
      */
-    public static List<Projet> chargerProjetsDepuisCSV(String chemin) throws CsvValidationException, IOException {
-
+    public static List<Projet> chargerProjetsDepuisCSV(String chemin) {
         List<Projet> projets = new ArrayList<>();
-        try (CSVReader reader = new CSVReader(new FileReader(chemin))) {
-            String[] nextLine;
 
-            // Passe la première ligne (header)
-            reader.readLine();
+        try (CSVReader reader = new CSVReader(new FileReader(chemin))) {
+            // Lit la première ligne (header) et n'en fait rien
+            String[] read = reader.readNext();
 
             // Tant qu'il y a des lignes à lire..
-            while ((nextLine = reader.readNext()) != null) {
-                // Read the information and store them in variables
-                String projetNom = nextLine[0];
-                String fichierNom = nextLine[1];
-                String fichierChemin = nextLine[2];
-                String fichierTexte = nextLine[3];
-
-                        // Lire jusqu'à rencontrer <fin-ligne>
-                        StringBuilder recordBuilder = new StringBuilder(nextLine);
-                        while (!nextLine.endsWith("<fin-ligne>") && (nextLine = reader.readNext()) != null) {
-                            recordBuilder.append(nextLine);
-                        }
-                        String record = recordBuilder.toString().replace("<fin-ligne>", "");
-                        // Traitez le record comme nécessaire
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            while ((read = reader.readNext()) != null) {
+                // Lit l'information et la stocke dans des variables
+                String projetNom = read[0];
+                String fichierNom = read[1];
+                String fichierChemin = read[2];
+                String fichierTexte = read[3];
 
                 // Chercher si le projet existe déjà
                 Projet projet = trouverProjetParNom(projets, projetNom);
@@ -83,21 +68,34 @@ public class DevoreurIO {
                     projets.add(projet);
                 }
 
-                // Crée un nouveau fichier et l'ajoute au projet
+                // Crée un nouveau fichier avec les variables définies et l'ajoute au projet
                 FichierProjet fichierProjet = new FichierProjet(fichierNom, fichierChemin, fichierTexte);
                 projet.addFichier(fichierProjet);
             }
-        } catch (CsvValidationException | IOException e) {
-            throw new RuntimeException(e);
-        }
-        return projets;
-    } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (CsvValidationException e) {
+            System.err.println("Erreur de validation du CSV: " + e.getMessage());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("Erreur d'entrée/sortie: " + e.getMessage());
         }
 
-        /**
+        return projets;
+    }
+
+
+    /**
+     * Neutralise les " , \n pour encapsuler dans un CSV
+     * @param value
+     * @return
+     */
+    public static String escapeCSV(String value) {
+        if (value.contains(",") || value.contains("\"") || value.contains("\n")) {
+            value = value.replace("\"", "\"\"");
+            return "\"" + value + "\"";
+        }
+        return value;
+    }
+
+    /**
      * Cherche un projet par son nom dans la liste des projets
      * @param projets : La liste des projets
      * @param nom : Le nom du projet à identifier

@@ -1,12 +1,12 @@
-Projet,NomFichier,Chemin,Type,ScoreIA
-VanessaSimsom,dependency.xml,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/dependency.xml,<dependency>
+Projet, NomFichier, Chemin, Texte
+VanessaSimsom, dependency.xml, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/dependency.xml, "<dependency>
     <groupId>org.languagetool</groupId>
     <artifactId>language-tool-core</artifactId>
     <version>5.4</version> <!-- ou la dernière version disponible -->
 </dependency>
 
-
-VanessaSimsom,SpellChecker.java,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/SpellChecker.java,import org.languagetool.JLanguageTool;
+"
+VanessaSimsom, SpellChecker.java, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/SpellChecker.java, "import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.LanguageTool;
 import org.languagetool.rules.RuleMatch;
@@ -17,11 +17,11 @@ import java.util.List;
 public class SpellChecker {
     public static void main(String[] args) {
         // Création de l'outil de vérification orthographique pour la langue française
-        Language lang = new Language("fr", "French");
+        Language lang = new Language(""fr"", ""French"");
         JLanguageTool langTool = new JLanguageTool(lang);
 
         // Texte à vérifier
-        String texte = "Ce texte contient quelque fautes d'orthographe.";
+        String texte = ""Ce texte contient quelque fautes d'orthographe."";
 
         // Vérification orthographique
         try {
@@ -29,26 +29,26 @@ public class SpellChecker {
             
             // Affichage des fautes d'orthographe détectées
             for (RuleMatch match : matches) {
-                System.out.println("Faute d'orthographe détectée : " + match.getMessage() +
-                                   " à la position " + match.getColumn() + " dans le texte.");
-                System.out.println("Correction proposée : " + match.getSuggestedReplacements());
+                System.out.println(""Faute d'orthographe détectée : "" + match.getMessage() +
+                                   "" à la position "" + match.getColumn() + "" dans le texte."");
+                System.out.println(""Correction proposée : "" + match.getSuggestedReplacements());
             }
             
             // Affichage du nombre total de fautes d'orthographe
-            System.out.println("Nombre total de fautes d'orthographe : " + matches.size());
+            System.out.println(""Nombre total de fautes d'orthographe : "" + matches.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
-
-VanessaSimsom,VanessaSimsom_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/VanessaSimsom_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+"
+VanessaSimsom, VanessaSimsom_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/VanessaSimsom_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 01_00, VanessaSimsom, ressources/StudentProjects/dependency.xml, 0.53, false, true, false
 01_01, VanessaSimsom, ressources/StudentProjects/SpellChecker.java, 0.43, false, true, false
 01_02, VanessaSimsom, ressources/StudentProjects/VanessaSimsom_score.csv, 0.43, false, true, false
 01_03, VanessaSimsom, ressources/StudentProjects/rep_ness.txt, 0.48, false, true, false
-
-VanessaSimsom,rep_ness.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/rep_ness.txt,Introduction
+"
+VanessaSimsom, rep_ness.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/rep_ness.txt, "Introduction
 
 La présente étude bibliographique décrit les notions de base nécessaires à l'appréciation de la pro-
 blématique de mon stage au sein de l'équipe CORDIAL de l'IRISA, dont le champ d'étude concerne
@@ -245,8 +245,8 @@ C'est le principe de la synthèse par corpus (SPC). Il faudra alors, lorsque l'o
 laquelle, dans le corpus, est la plus adaptée à son contexte souhaité lors de la synthèse. Cela implique
 de pénaliser les unités les moins adaptées, d'où la nécessité de dénir une notion de coût. C'est sur cette
 dernière évolution de la synthèse par sélection d'unités que porte notre stage.
-
-ErasmusVintek,howto.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/howto.txt,1. install JavaFx
+"
+ErasmusVintek, howto.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/howto.txt, "1. install JavaFx
 
 sudo apt install openjfx
 
@@ -257,8 +257,8 @@ javac GameOfLife.java --module-path /usr/share/openjfx/lib --add-modules=javafx.
 3. run with the right options
 
 java GameOfLife --module-path /usr/share/openjfx/lib --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web
-
-ErasmusVintek,GameOfLife.java,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/GameOfLife.java,import javafx.animation.KeyFrame;
+"
+ErasmusVintek, GameOfLife.java, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/GameOfLife.java, "import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -301,7 +301,7 @@ public class GameOfLife extends Application {
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Game of Life");
+        primaryStage.setTitle(""Game of Life"");
         primaryStage.show();
     }
 
@@ -360,14 +360,14 @@ public class GameOfLife extends Application {
     }
 }
 
-
-ErasmusVintek,ErasmusVintek_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/ErasmusVintek_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+"
+ErasmusVintek, ErasmusVintek_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/ErasmusVintek_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 02_00, ErasmusVintek, ressources/StudentProjects/howto.txt, 0.55, false, true, false
 02_01, ErasmusVintek, ressources/StudentProjects/GameOfLife.java, 0.45, false, true, false
 02_02, ErasmusVintek, ressources/StudentProjects/ErasmusVintek_score.csv, 0.58, false, true, false
 02_03, ErasmusVintek, ressources/StudentProjects/rapport.txt, 0.5, false, true, false
-
-ErasmusVintek,rapport.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/rapport.txt,Rapport de projet
+"
+ErasmusVintek, rapport.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/rapport.txt, "Rapport de projet
 Le jeu GameOfLife
 
 Erasmus Vintek
@@ -375,7 +375,7 @@ Erasmus Vintek
 
 1. Introduction
 
-Le jeu Game of Life, également connu sous le nom de "vie", est un automate cellulaire imaginé par le mathématicien britannique John Horton Conway en 1970. Bien que ses règles soient simples, le jeu peut générer des motifs complexes et fascinants. Dans ce document, nous allons explorer le jeu Game of Life, présenter ses règles, mettre en œuvre une version en Java et effectuer des tests pour illustrer son fonctionnement.
+Le jeu Game of Life, également connu sous le nom de ""vie"", est un automate cellulaire imaginé par le mathématicien britannique John Horton Conway en 1970. Bien que ses règles soient simples, le jeu peut générer des motifs complexes et fascinants. Dans ce document, nous allons explorer le jeu Game of Life, présenter ses règles, mettre en œuvre une version en Java et effectuer des tests pour illustrer son fonctionnement.
 2. Présentation du jeu
 
 Le jeu Game of Life se déroule sur une grille bidimensionnelle infinie de cellules carrées. Chaque cellule peut être dans l'un des deux états : vivante ou morte. À chaque étape, l'état de chaque cellule est déterminé par un ensemble de règles simples :
@@ -445,8 +445,8 @@ public class GameOfLifeTest {
 Le jeu Game of Life est un exemple fascinant d'un système dynamique simple mais complexe. Bien que ses règles soient basiques, il peut générer des configurations complexes et imprévisibles. L'implémentation en Java que nous avons réalisée démontre la simplicité de modéliser et de simuler des systèmes cellulaires dans un environnement de programmation. Ce jeu reste toujours un sujet d'étude populaire dans les domaines des mathématiques, de la biologie et de l'informatique. En tant que tel, il continue d'attirer l'intérêt des chercheurs et des amateurs de jeux.
 
 J'ai beaucoup apprécié ce projet mais c'était très dur et cela m'a pris beaucoup de temps. 
-
-MattSenex,rapport_senex.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/rapport_senex.txt,
+"
+MattSenex, rapport_senex.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/rapport_senex.txt, "
 			Rapport de projet NabuTalk
 	Réalisation d'un agent conversationnel pour le site de l'ENSSAT
 
@@ -487,9 +487,9 @@ langage :
 alt({
 
 alt({[quel] [sont]} {[c-est] [quoi]})
-alt([specialite] [formation] "filieres" "filières" "cycles d'etude"
+alt([specialite] [formation] ""filieres"" ""filières"" ""cycles d'etude""
 
-"cycles d'étude")
+""cycles d'étude"")
 
 optional([enssat])}
 
@@ -500,7 +500,7 @@ optional([enssat])}
 optional(alt([enssat] [ecole]))
 alt([est] {[a] [ete]} {[a] [elle] [ete]})
 alt(#certifiee# #certifiée# #habilitee# #habilitée#)
-optional({[par] alt("CTI" "cti" [organisme] {"comission" [au] [titre]
+optional({[par] alt(""CTI"" ""cti"" [organisme] {""comission"" [au] [titre]
 
 [ingenieur]})})}
 )
@@ -521,7 +521,7 @@ Agent : L'ENSSAT est habilitee par [...] de qualite EUR-ACE. En quoi puis-je vou
 Agent : L'ENSSAT possède quatre filières : EII pour Electronique et Informatique Industrielle, OPT pour Optronique et
 les deux formations en informatique [...] et Reseaux).
 104) User : Où se situe l'ENSSAT ?
-Agent : L'ENSSAT est à <a href="http://www.ville-lannion.fr">Lannion</a> dans les Côtes d'Armor. Avez-vous une
+Agent : L'ENSSAT est à <a href=""http://www.ville-lannion.fr"">Lannion</a> dans les Côtes d'Armor. Avez-vous une
 autre question ?
 
 1.2 Partie Admission
@@ -532,17 +532,17 @@ Questions du type : comment faire pour intégrer l'enssat ?
 
 Définition du modèle de questions :
 (nlu-resource [id:question_integrer_enssat]
-{alt([comment]) optional("faire pour") optional([syn_puis-je] ) alt( "integrer"
-"entrer" "postuler") {optional( " a " ) " l'enssat "} }
+{alt([comment]) optional(""faire pour"") optional([syn_puis-je] ) alt( ""integrer""
+""entrer"" ""postuler"") {optional( "" a "" ) "" l'enssat ""} }
 )
 (nlu-resource [id:question_integrer_enssat_apres]
-{alt([syn_puis-je]) optional(alt("de" "d'")) alt("faire " alt( "integrer" "entrer"
-"postuler")) {optional( " a " ) " l'enssat "} alt([avec] [apres]) alt([un] [une])
-alt("classe prepa" "classe preparatoire" "dut" "iut" "bts") }
+{alt([syn_puis-je]) optional(alt(""de"" ""d'"")) alt(""faire "" alt( ""integrer"" ""entrer""
+""postuler"")) {optional( "" a "" ) "" l'enssat ""} alt([avec] [apres]) alt([un] [une])
+alt(""classe prepa"" ""classe preparatoire"" ""dut"" ""iut"" ""bts"") }
 )
 (nlu-resource [id:question_quelles_formations]
-{ alt("quelles" "quels") alt("formations" "cursus") "permettent" alt("de" "d'")
-alt("faire " alt( "integrer" "entrer" "postuler")) {optional( " a " ) " l'enssat "} }
+{ alt(""quelles"" ""quels"") alt(""formations"" ""cursus"") ""permettent"" alt(""de"" ""d'"")
+alt(""faire "" alt( ""integrer"" ""entrer"" ""postuler"")) {optional( "" a "" ) "" l'enssat ""} }
 )
 Jeux de tests :
 User : comment faire pour intégrer l'enssat ?
@@ -576,10 +576,10 @@ Questions concernant les contacts pour l'admission
 Définition du modèle de questions :
 (nlu-resource [id:question_contact_admission]
 
-{ optional("a") alt("qui") alt("doit-on" "peut-on") alt("contacter" "s'adresser")
-alt("pour" "a propos") alt("les" "l'" "des") alt("inscriptions" "inscription"
-"dossiers" "documents" "demarches") optional(alt("administratives" "administratifs"
-"d'admission")) }
+{ optional(""a"") alt(""qui"") alt(""doit-on"" ""peut-on"") alt(""contacter"" ""s'adresser"")
+alt(""pour"" ""a propos"") alt(""les"" ""l'"" ""des"") alt(""inscriptions"" ""inscription""
+""dossiers"" ""documents"" ""demarches"") optional(alt(""administratives"" ""administratifs""
+""d'admission"")) }
 )
 Jeux de tests :
 User : a qui doit-on s'adresser pour les dossiers d'admission ?
@@ -589,13 +589,13 @@ Agent : Catherine Delen, telephone: 02 96 46 90 60, email: secretariat.concours 
 Questions concernant les modalités d'inscription
 Définition du modèle de questions :
 (nlu-resource [id:modalites_admission]
-{ alt("quelles") alt("sont") alt("les modalites") alt("d' ") alt("inscription"
-"admission") optional({"en" alt("premiere" "1ere") "annee"})}
+{ alt(""quelles"") alt(""sont"") alt(""les modalites"") alt(""d' "") alt(""inscription""
+""admission"") optional({""en"" alt(""premiere"" ""1ere"") ""annee""})}
 )
 (nlu-resource [id:modalites_admission_date]
-{ alt("quelles") alt("sont") alt("les dates") optional("limites") alt("d' " "du"
-"des") optional("jury") optional("d'") alt("inscription" "admission" "concours")
-optional({"en" alt("premiere" "1ere") "annee"})}
+{ alt(""quelles"") alt(""sont"") alt(""les dates"") optional(""limites"") alt(""d' "" ""du""
+""des"") optional(""jury"") optional(""d'"") alt(""inscription"" ""admission"" ""concours"")
+optional({""en"" alt(""premiere"" ""1ere"") ""annee""})}
 )
 Jeux de tests :
 User : quelles sont les modalites d'inscription ?
@@ -616,10 +616,10 @@ du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en 
 
 1.3 Partie LSI
 Notre agent conversationnel est capable de répondre à trois types de questions sur la filière LSI :
-{ optional("a") alt("qui") alt("doit-on" "peut-on") alt("contacter" "s'adresser")
-alt("pour" "a propos") alt("les" "l'" "des") alt("inscriptions" "inscription"
-"dossiers" "documents" "demarches") optional(alt("administratives" "administratifs"
-"d'admission")) }
+{ optional(""a"") alt(""qui"") alt(""doit-on"" ""peut-on"") alt(""contacter"" ""s'adresser"")
+alt(""pour"" ""a propos"") alt(""les"" ""l'"" ""des"") alt(""inscriptions"" ""inscription""
+""dossiers"" ""documents"" ""demarches"") optional(alt(""administratives"" ""administratifs""
+""d'admission"")) }
 )
 Jeux de tests :
 User : a qui doit-on s'adresser pour les dossiers d'admission ?
@@ -629,13 +629,13 @@ Agent : Catherine Delen, telephone: 02 96 46 90 60, email: secretariat.concours 
 Questions concernant les modalités d'inscription
 Définition du modèle de questions :
 (nlu-resource [id:modalites_admission]
-{ alt("quelles") alt("sont") alt("les modalites") alt("d' ") alt("inscription"
-"admission") optional({"en" alt("premiere" "1ere") "annee"})}
+{ alt(""quelles"") alt(""sont"") alt(""les modalites"") alt(""d' "") alt(""inscription""
+""admission"") optional({""en"" alt(""premiere"" ""1ere"") ""annee""})}
 )
 (nlu-resource [id:modalites_admission_date]
-{ alt("quelles") alt("sont") alt("les dates") optional("limites") alt("d' " "du"
-"des") optional("jury") optional("d'") alt("inscription" "admission" "concours")
-optional({"en" alt("premiere" "1ere") "annee"})}
+{ alt(""quelles"") alt(""sont"") alt(""les dates"") optional(""limites"") alt(""d' "" ""du""
+""des"") optional(""jury"") optional(""d'"") alt(""inscription"" ""admission"" ""concours"")
+optional({""en"" alt(""premiere"" ""1ere"") ""annee""})}
 )
 Jeux de tests :
 User : quelles sont les modalites d'inscription ?
@@ -698,7 +698,7 @@ goto(from-formation($f))
 dialogue-unit[
 id:spontane(interet)
 input: [interet($i)]
-output: "Heureux de l'apprendre,"
+output: ""Heureux de l'apprendre,""
 effect:{
 (u-interetMarque $i)
 
@@ -711,7 +711,7 @@ id:spontane-supreme
 input: alt({optional([provenance]) [formation($f)] [et] [interet($i)]}
 {[interet($i)] [et] optional([provenance]) [formation($f)]}
 )
-output: "J'en prends note."
+output: ""J'en prends note.""
 effect:{
 
 (u-interetMarque $i)
@@ -724,17 +724,17 @@ antérieure) de l'interlocuteur. Voici, l'un de ces dialog-units, dédié aux ut
 préparatoires :
 dialogue-unit[
 id:from-formation(CPGE)
-output:{"Dans ce cas, pour aller en LSI, vous devrez suivre un semestre général
+output:{""Dans ce cas, pour aller en LSI, vous devrez suivre un semestre général
 vous permettant de voir ce qui se fait à l'ENSSAT en informatique, électronique et
 optronique. A l'issue de ce semestre, vous pourrez choisir la formation LSI. Veuillez
-noter que vous ne pouvez pas aller en IMR avec cette formation."}
+noter que vous ne pouvez pas aller en IMR avec cette formation.""}
 ]
 Dans le cas 1, en revanche, on en prend simplement note en proposant un complément
 d'informations sur la formation envisagée, c'est le rôle des dialog-units noter-interet($x) :
 
 dialogue-unit[
 id:noter-interet(lsi)
-output:"je peux peut-être vous renseigner plus en detail sur cette formation ?"
+output:""je peux peut-être vous renseigner plus en detail sur cette formation ?""
 next:{
 dialogue-unit[
 input:{alt([con_yes] [con_agree])}
@@ -746,7 +746,7 @@ input:alt([con_i-dont-know] [con_none] [con_it-doesnt-matter]
 
 [con_no] [con_disagree])
 
-output:"d'accord, je vous laisse naviguer sur le site."
+output:""d'accord, je vous laisse naviguer sur le site.""
 ]
 
 }
@@ -775,30 +775,30 @@ le suivant :
 dialogue-unit[
 id:acquisition-specialite-lsi
 category:lsi
-output:"La formation LSI est-elle celle qui vous interesse le plus ?"
+output:""La formation LSI est-elle celle qui vous interesse le plus ?""
 next:{
 dialogue-unit[
 
 id:specialite-preferee
 input:alt([con_yes] [con_agree])
-effect:{(u-interetMarque "LSI")} // Noter l'interet
-output:"D'accord, je note que vous souhaitez aller en"
+effect:{(u-interetMarque ""LSI"")} // Noter l'interet
+output:""D'accord, je note que vous souhaitez aller en""
 goto:afficherInteret()
 ]
 dialogue-unit[
 input:alt([con_no] [con_disagree] [specialite(IMR)])
-effect:{(u-interetMarque "IMR")}
-output:"d'accord, je note que vous souhaitez aller en"
+effect:{(u-interetMarque ""IMR"")}
+output:""d'accord, je note que vous souhaitez aller en""
 goto:afficherInteret()
 ]
 dialogue-unit[
 input:alt([con_it-doesnt-matter] [con_i-dont-know] [con_none])
-effect:{(u-interetMarque "AUCUN")}
-output:"d'accord, je vous laisse naviguer sur le site."
+effect:{(u-interetMarque ""AUCUN"")}
+output:""d'accord, je vous laisse naviguer sur le site.""
 ]
 dialogue-unit[
 input:alt([con_no] [con_disagree])
-output:"d'accord, je vous laisse naviguer sur le site."
+output:""d'accord, je vous laisse naviguer sur le site.""
 ]
 }
 ]
@@ -829,14 +829,14 @@ dialogue) de notre automate, assez pauvre en la matière pour l'instant. Nous re
 ne pas avoir réussi à déployer correctement l'application sur le serveur « bac à sable » de Dialonics
 (tentative avec XX = 44 ).
 
-
-MattSenex,intro.code,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/intro.code,(nlu-resource [id:con_specialites]
+"
+MattSenex, intro.code, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/intro.code, "(nlu-resource [id:con_specialites]
 alt({
 
 alt({[quel] [sont]} {[c-est] [quoi]})
-alt([specialite] [formation] "filieres" "filières" "cycles d'etude"
+alt([specialite] [formation] ""filieres"" ""filières"" ""cycles d'etude""
 
-"cycles d'étude")
+""cycles d'étude"")
 
 optional([enssat])}
 
@@ -847,17 +847,17 @@ optional([enssat])}
 optional(alt([enssat] [ecole]))
 alt([est] {[a] [ete]} {[a] [elle] [ete]})
 alt(#certifiee# #certifiée# #habilitee# #habilitée#)
-optional({[par] alt("CTI" "cti" [organisme] {"comission" [au] [titre]
+optional({[par] alt(""CTI"" ""cti"" [organisme] {""comission"" [au] [titre]
 
 [ingenieur]})})}
 )
-
-MattSenex,MattSenex_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/MattSenex_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+"
+MattSenex, MattSenex_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/MattSenex_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 03_00, MattSenex, ressources/StudentProjects/rapport_senex.txt, 0.5, false, true, false
 03_01, MattSenex, ressources/StudentProjects/intro.code, 0.38, false, true, false
 03_02, MattSenex, ressources/StudentProjects/MattSenex_score.csv, 0.64, false, true, false
-
-Ethan_MountainDewMaster,truc_super_long.py,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/truc_super_long.py,import os
+"
+Ethan_MountainDewMaster, truc_super_long.py, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/truc_super_long.py, "import os
 import glob
 import click
 from tqdm import tqdm
@@ -902,24 +902,24 @@ def main(directory, out_file, duration_threshold):
 
 if __name__ == '__main__':
         main()
-
-Ethan_MountainDewMaster,Ethan_MountainDewMaster_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/Ethan_MountainDewMaster_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+"
+Ethan_MountainDewMaster, Ethan_MountainDewMaster_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/Ethan_MountainDewMaster_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 04_00, Ethan_MountainDewMaster, ressources/StudentProjects/truc_super_long.py, 0.55, false, true, false
 04_01, Ethan_MountainDewMaster, ressources/StudentProjects/Ethan_MountainDewMaster_score.csv, 0.46, false, true, false
 04_02, Ethan_MountainDewMaster, ressources/StudentProjects/super_script.py, 0.51, false, true, false
-
-Ethan_MountainDewMaster,super_script.py,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/super_script.py,import csv
+"
+Ethan_MountainDewMaster, super_script.py, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/super_script.py, "import csv
 import click
 import pandas as pd
 from tqdm import tqdm
 
-CHOICES = {"train-clean-100":"english", "train-clean-360":"english", "mls_french":"french", "mls_german":"german", "mls_portuguese":"portuguese", "mls_polish":"polish", "mls_dutch":"dutch", "mls_spanish":"spanish", "mls_italian":"italian"}
+CHOICES = {""train-clean-100"":""english"", ""train-clean-360"":""english"", ""mls_french"":""french"", ""mls_german"":""german"", ""mls_portuguese"":""portuguese"", ""mls_polish"":""polish"", ""mls_dutch"":""dutch"", ""mls_spanish"":""spanish"", ""mls_italian"":""italian""}
 
 def find_lang(text:str) -> str:
     for choice, lg in CHOICES.items():
         if choice in text:
             return lg
-    exit(f"ERROR: String {text} must match one of the following choices: {CHOICES}")
+    exit(f""ERROR: String {text} must match one of the following choices: {CHOICES}"")
 
 @click.command()
 @click.argument('csv_file', type=str)# type=click.File('r'))
@@ -941,19 +941,19 @@ def match_lines(csv_file, wav_list_file, output_file):
     # Match each line of the CSV with the associated line in the WAV list with tqdm progress bar
     for basename, transcription in tqdm(csvdata.items(), total=len(csvdata)):
         found = False
-        #print(f"{basename}")
+        #print(f""{basename}"")
         for line in wav_list_lines:
             if basename in line:
                 line= line.strip()
                 lg = find_lang(line)
                 matched_lines.append([lg, basename, transcription])
                 found = True
-                # if "103_1241_000020_000005" in basename:
-                #    print(f"OK = {lg}, {basename}, {transcription}")
+                # if ""103_1241_000020_000005"" in basename:
+                #    print(f""OK = {lg}, {basename}, {transcription}"")
                 #    exit(1)
                 break
         if not found:
-            click.echo(f"Could not find a match for: {basename}")
+            click.echo(f""Could not find a match for: {basename}"")
 
     # Create a DataFrame with the matched lines and export it to a new CSV file
     matched_df = pd.DataFrame(matched_lines, columns=['Language', 'Basename', 'Transcript'])
@@ -966,18 +966,18 @@ def match_lines(csv_file, wav_list_file, output_file):
     #    for line in matched_lines:
     #        writer.writerow({'Language': line[0], 'Basename': line[1], 'Transcript': line[2]})
 
-    print("Matching completed successfully!")
+    print(""Matching completed successfully!"")
 
 
 if __name__ == '__main__':
     match_lines()
 
-
-Boby,Boby_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Boby/Boby_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+"
+Boby, Boby_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Boby/Boby_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 05_00, Boby, ressources/StudentProjects/Boby_score.csv, 0.28, false, true, false
 05_01, Boby, ressources/StudentProjects/Report.txt, 0.52, false, true, false
-
-Boby,Report.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Boby/Report.txt,Rapport TDI
+"
+Boby, Report.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Boby/Report.txt, "Rapport TDI
 
 I - Structure de la TDI
 La TDI (Table Des Identificateurs) est une structure de données permettant d’enregistrer des éléments clefs nécessaires au cours du processus de compilation.
@@ -1005,15 +1005,15 @@ Par exemple la compilation des instructions de création d’une classe nécessi
 De même, lors de la création d’une classe donnant lieu à un héritage, il convient de vérifier que la classe mère est bien renseignée au sein de la TDI.
 
 
-
-KevinTruaux,KevinTruaux_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/KevinTruaux_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+"
+KevinTruaux, KevinTruaux_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/KevinTruaux_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 06_00, KevinTruaux, ressources/StudentProjects/KevinTruaux_score.csv, 0.32, false, true, false
 06_01, KevinTruaux, ressources/StudentProjects/main.c, 0.39, false, true, false
 06_02, KevinTruaux, ressources/StudentProjects/rapport.txt, 0.51, false, true, false
+"
+KevinTruaux, main.c, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/main.c, "int main() {						  					// priorite = 1 
 
-KevinTruaux,main.c,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/main.c,int main() {						  					// priorite = 1 
-
-	affiche("demarrage de main");		
+	affiche(""demarrage de main"");		
 									// pour etape 3
 	sem1 = alloueSemaphore(1);
 	sem2 = alloueSemaphore(0);
@@ -1029,12 +1029,12 @@ KevinTruaux,main.c,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoi
 	detruitProcessus(pid2);				
 	detruitProcessus(obtientPid());		
 
-	affiche("fin de main");				
+	affiche(""fin de main"");				
 		  
 	return 0; // pour compilateur
 }
-
-KevinTruaux,rapport.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/rapport.txt,Rapport projet WEB
+"
+KevinTruaux, rapport.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/rapport.txt, "Rapport projet WEB
 Partie contrôleur
 
 Sommaire
@@ -1104,4 +1104,4 @@ Conclusion
 ----------
 
 Les différents contrôleurs de l'application jouent un rôle essentiel dans son fonctionnement. En coordonnant les interactions entre les utilisateurs, les données et les vues, ils assurent une expérience utilisateur fluide et sécurisée. La subdivision des contrôleurs en contrôleur principal et contrôleurs spécialisés permet une modularité et une maintenabilité accrues de l'application. En continuant à développer et à améliorer ces contrôleurs, l'application pourra répondre efficacement aux besoins de ses utilisateurs et évoluer en fonction des exigences futures.
-
+"
