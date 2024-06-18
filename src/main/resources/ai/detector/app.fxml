@@ -80,7 +80,7 @@
               </Menu>
               <Menu id="menu-help" mnemonicParsing="false" text="Aide">
                 <items>
-                  <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                  <MenuItem mnemonicParsing="false" text="A propos" disable="true" />
                 </items>
               </Menu>
             </menus>

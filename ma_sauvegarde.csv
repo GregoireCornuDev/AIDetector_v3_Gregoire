@@ -1,12 +1,12 @@
 Projet, NomFichier, Chemin, Texte
-VanessaSimsom, dependency.xml, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/dependency.xml, "<dependency>
+VanessaSimsom,  dependency.xml,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/dependency.xml, "<dependency>
     <groupId>org.languagetool</groupId>
     <artifactId>language-tool-core</artifactId>
     <version>5.4</version> <!-- ou la dernière version disponible -->
 </dependency>
 
 "
-VanessaSimsom, SpellChecker.java, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/SpellChecker.java, "import org.languagetool.JLanguageTool;
+VanessaSimsom,  SpellChecker.java,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/SpellChecker.java, "import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.LanguageTool;
 import org.languagetool.rules.RuleMatch;
@@ -42,13 +42,13 @@ public class SpellChecker {
     }
 }
 "
-VanessaSimsom, VanessaSimsom_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/VanessaSimsom_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+VanessaSimsom,  VanessaSimsom_score.csv,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/VanessaSimsom_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 01_00, VanessaSimsom, ressources/StudentProjects/dependency.xml, 0.53, false, true, false
 01_01, VanessaSimsom, ressources/StudentProjects/SpellChecker.java, 0.43, false, true, false
 01_02, VanessaSimsom, ressources/StudentProjects/VanessaSimsom_score.csv, 0.43, false, true, false
 01_03, VanessaSimsom, ressources/StudentProjects/rep_ness.txt, 0.48, false, true, false
 "
-VanessaSimsom, rep_ness.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/rep_ness.txt, "Introduction
+VanessaSimsom,  rep_ness.txt,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/rep_ness.txt, "Introduction
 
 La présente étude bibliographique décrit les notions de base nécessaires à l'appréciation de la pro-
 blématique de mon stage au sein de l'équipe CORDIAL de l'IRISA, dont le champ d'étude concerne
@@ -246,7 +246,7 @@ laquelle, dans le corpus, est la plus adaptée à son contexte souhaité lors de
 de pénaliser les unités les moins adaptées, d'où la nécessité de dénir une notion de coût. C'est sur cette
 dernière évolution de la synthèse par sélection d'unités que porte notre stage.
 "
-ErasmusVintek, howto.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/howto.txt, "1. install JavaFx
+ErasmusVintek,  howto.txt,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/howto.txt, "1. install JavaFx
 
 sudo apt install openjfx
 
@@ -258,7 +258,7 @@ javac GameOfLife.java --module-path /usr/share/openjfx/lib --add-modules=javafx.
 
 java GameOfLife --module-path /usr/share/openjfx/lib --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web
 "
-ErasmusVintek, GameOfLife.java, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/GameOfLife.java, "import javafx.animation.KeyFrame;
+ErasmusVintek,  GameOfLife.java,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/GameOfLife.java, "import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -361,13 +361,13 @@ public class GameOfLife extends Application {
 }
 
 "
-ErasmusVintek, ErasmusVintek_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/ErasmusVintek_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+ErasmusVintek,  ErasmusVintek_score.csv,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/ErasmusVintek_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 02_00, ErasmusVintek, ressources/StudentProjects/howto.txt, 0.55, false, true, false
 02_01, ErasmusVintek, ressources/StudentProjects/GameOfLife.java, 0.45, false, true, false
 02_02, ErasmusVintek, ressources/StudentProjects/ErasmusVintek_score.csv, 0.58, false, true, false
 02_03, ErasmusVintek, ressources/StudentProjects/rapport.txt, 0.5, false, true, false
 "
-ErasmusVintek, rapport.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/rapport.txt, "Rapport de projet
+ErasmusVintek,  rapport.txt,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/rapport.txt, "Rapport de projet
 Le jeu GameOfLife
 
 Erasmus Vintek
@@ -446,7 +446,7 @@ Le jeu Game of Life est un exemple fascinant d'un système dynamique simple mais
 
 J'ai beaucoup apprécié ce projet mais c'était très dur et cela m'a pris beaucoup de temps. 
 "
-MattSenex, rapport_senex.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/rapport_senex.txt, "
+MattSenex,  rapport_senex.txt,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/rapport_senex.txt, " 
 			Rapport de projet NabuTalk
 	Réalisation d'un agent conversationnel pour le site de l'ENSSAT
 
@@ -830,7 +830,7 @@ ne pas avoir réussi à déployer correctement l'application sur le serveur « b
 (tentative avec XX = 44 ).
 
 "
-MattSenex, intro.code, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/intro.code, "(nlu-resource [id:con_specialites]
+MattSenex,  intro.code,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/intro.code, "(nlu-resource [id:con_specialites]
 alt({
 
 alt({[quel] [sont]} {[c-est] [quoi]})
@@ -852,12 +852,12 @@ optional({[par] alt(""CTI"" ""cti"" [organisme] {""comission"" [au] [titre]
 [ingenieur]})})}
 )
 "
-MattSenex, MattSenex_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/MattSenex_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+MattSenex,  MattSenex_score.csv,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/MattSenex_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 03_00, MattSenex, ressources/StudentProjects/rapport_senex.txt, 0.5, false, true, false
 03_01, MattSenex, ressources/StudentProjects/intro.code, 0.38, false, true, false
 03_02, MattSenex, ressources/StudentProjects/MattSenex_score.csv, 0.64, false, true, false
 "
-Ethan_MountainDewMaster, truc_super_long.py, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/truc_super_long.py, "import os
+Ethan_MountainDewMaster,  truc_super_long.py,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/truc_super_long.py, "import os
 import glob
 import click
 from tqdm import tqdm
@@ -876,7 +876,7 @@ def list_long_wav_files(directory, duration_threshold, output_file):
 
     with open(output_file, 'w') as file:
         for file_path in long_wav_files:
-            file.write(file_path + '\n')
+            file.write(file_path + 'n')
 
 def get_wav_duration(wav_file):
     try:
@@ -903,12 +903,12 @@ def main(directory, out_file, duration_threshold):
 if __name__ == '__main__':
         main()
 "
-Ethan_MountainDewMaster, Ethan_MountainDewMaster_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/Ethan_MountainDewMaster_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+Ethan_MountainDewMaster,  Ethan_MountainDewMaster_score.csv,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/Ethan_MountainDewMaster_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 04_00, Ethan_MountainDewMaster, ressources/StudentProjects/truc_super_long.py, 0.55, false, true, false
 04_01, Ethan_MountainDewMaster, ressources/StudentProjects/Ethan_MountainDewMaster_score.csv, 0.46, false, true, false
 04_02, Ethan_MountainDewMaster, ressources/StudentProjects/super_script.py, 0.51, false, true, false
 "
-Ethan_MountainDewMaster, super_script.py, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/super_script.py, "import csv
+Ethan_MountainDewMaster,  super_script.py,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/super_script.py, "import csv
 import click
 import pandas as pd
 from tqdm import tqdm
@@ -928,7 +928,7 @@ def find_lang(text:str) -> str:
 def match_lines(csv_file, wav_list_file, output_file):
     csvdata = {}
     with open(csv_file, newline='') as csvfile:
-        reader = csv.reader(csvfile, delimiter='\t', quotechar='|')
+        reader = csv.reader(csvfile, delimiter='t', quotechar='|')
         for row in reader:
             csvdata[row[0]] = row[1]
 
@@ -957,7 +957,7 @@ def match_lines(csv_file, wav_list_file, output_file):
 
     # Create a DataFrame with the matched lines and export it to a new CSV file
     matched_df = pd.DataFrame(matched_lines, columns=['Language', 'Basename', 'Transcript'])
-    matched_df.to_csv(output_file, sep='\t', index=False)
+    matched_df.to_csv(output_file, sep='t', index=False)
 
     #with open('test.csv', 'w', newline='') as csvfile:
     #    fieldnames = ['Language', 'Basename', 'Transcript']
@@ -973,11 +973,11 @@ if __name__ == '__main__':
     match_lines()
 
 "
-Boby, Boby_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Boby/Boby_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+Boby,  Boby_score.csv,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Boby/Boby_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 05_00, Boby, ressources/StudentProjects/Boby_score.csv, 0.28, false, true, false
 05_01, Boby, ressources/StudentProjects/Report.txt, 0.52, false, true, false
 "
-Boby, Report.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Boby/Report.txt, "Rapport TDI
+Boby,  Report.txt,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Boby/Report.txt, "Rapport TDI
 
 I - Structure de la TDI
 La TDI (Table Des Identificateurs) est une structure de données permettant d’enregistrer des éléments clefs nécessaires au cours du processus de compilation.
@@ -1006,12 +1006,12 @@ De même, lors de la création d’une classe donnant lieu à un héritage, il c
 
 
 "
-KevinTruaux, KevinTruaux_score.csv, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/KevinTruaux_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+KevinTruaux,  KevinTruaux_score.csv,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/KevinTruaux_score.csv, "Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
 06_00, KevinTruaux, ressources/StudentProjects/KevinTruaux_score.csv, 0.32, false, true, false
 06_01, KevinTruaux, ressources/StudentProjects/main.c, 0.39, false, true, false
 06_02, KevinTruaux, ressources/StudentProjects/rapport.txt, 0.51, false, true, false
 "
-KevinTruaux, main.c, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/main.c, "int main() {						  					// priorite = 1 
+KevinTruaux,  main.c,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/main.c, "int main() {						  					// priorite = 1 
 
 	affiche(""demarrage de main"");		
 									// pour etape 3
@@ -1034,7 +1034,7 @@ KevinTruaux, main.c, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Greg
 	return 0; // pour compilateur
 }
 "
-KevinTruaux, rapport.txt, /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/rapport.txt, "Rapport projet WEB
+KevinTruaux,  rapport.txt,  /home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/rapport.txt, "Rapport projet WEB
 Partie contrôleur
 
 Sommaire
