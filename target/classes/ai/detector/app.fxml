@@ -92,8 +92,8 @@
             </menus>
           </MenuBar>
             <Button fx:id="btnCharger" mnemonicParsing="false" prefHeight="26.0" prefWidth="183.0" text="Charger depuis dossier" wrapText="true" />
-            <Button id="btn-load-from-csv" mnemonicParsing="false" prefHeight="26.0" prefWidth="156.0" text="Charger depuis CSV" onAction="#chargerDepuisCSV" />
-            <Button id="btn-save-csv" mnemonicParsing="false" prefHeight="26.0" prefWidth="164.0" text="Sauvegarder CSV" onAction="#sauvegarderEnCSV" />
+            <Button fx:id="btnChargerCSV" mnemonicParsing="false" prefHeight="26.0" prefWidth="156.0" text="Charger depuis CSV" />
+            <Button fx:id="btnSauvegarderCSV" mnemonicParsing="false" prefHeight="26.0" prefWidth="164.0" text="Sauvegarder CSV" />
          </children>
       </HBox>
       <HBox id="content" prefHeight="574.0" prefWidth="840.0" spacing="10.0">

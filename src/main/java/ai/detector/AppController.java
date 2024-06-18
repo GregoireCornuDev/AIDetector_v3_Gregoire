@@ -32,7 +32,6 @@ public class AppController {
     @FXML private Button btnChargerCSV;
 
 
-
     private ObservableList<Projet> projets = FXCollections.observableArrayList();
 
     @FXML
@@ -67,6 +66,11 @@ public class AppController {
         // Ajout d'un listener sur le bouton 'Supprimer Projet'
         btnSupprimerProjet.setOnAction(event -> supprimerProjet());
 
+        // Ajout d'un listener sur le bouton 'Sauvegarder en CSV'
+        btnSauvegarderCSV.setOnAction(event -> sauvegarderEnCSV());
+
+        // Ajout d'un listener sur le bouton 'Charger depuis CSV'
+        btnChargerCSV.setOnAction(event -> chargerDepuisCSV());
 
     }
 

@@ -1,0 +1,1107 @@
+Projet,NomFichier,Chemin,Type,ScoreIA
+VanessaSimsom,dependency.xml,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/dependency.xml,<dependency>
+    <groupId>org.languagetool</groupId>
+    <artifactId>language-tool-core</artifactId>
+    <version>5.4</version> <!-- ou la dernière version disponible -->
+</dependency>
+
+
+VanessaSimsom,SpellChecker.java,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/SpellChecker.java,import org.languagetool.JLanguageTool;
+import org.languagetool.Language;
+import org.languagetool.LanguageTool;
+import org.languagetool.rules.RuleMatch;
+
+import java.io.IOException;
+import java.util.List;
+
+public class SpellChecker {
+    public static void main(String[] args) {
+        // Création de l'outil de vérification orthographique pour la langue française
+        Language lang = new Language("fr", "French");
+        JLanguageTool langTool = new JLanguageTool(lang);
+
+        // Texte à vérifier
+        String texte = "Ce texte contient quelque fautes d'orthographe.";
+
+        // Vérification orthographique
+        try {
+            List<RuleMatch> matches = langTool.check(texte);
+            
+            // Affichage des fautes d'orthographe détectées
+            for (RuleMatch match : matches) {
+                System.out.println("Faute d'orthographe détectée : " + match.getMessage() +
+                                   " à la position " + match.getColumn() + " dans le texte.");
+                System.out.println("Correction proposée : " + match.getSuggestedReplacements());
+            }
+            
+            // Affichage du nombre total de fautes d'orthographe
+            System.out.println("Nombre total de fautes d'orthographe : " + matches.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+VanessaSimsom,VanessaSimsom_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/VanessaSimsom_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+01_00, VanessaSimsom, ressources/StudentProjects/dependency.xml, 0.53, false, true, false
+01_01, VanessaSimsom, ressources/StudentProjects/SpellChecker.java, 0.43, false, true, false
+01_02, VanessaSimsom, ressources/StudentProjects/VanessaSimsom_score.csv, 0.43, false, true, false
+01_03, VanessaSimsom, ressources/StudentProjects/rep_ness.txt, 0.48, false, true, false
+
+VanessaSimsom,rep_ness.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/VanessaSimsom/rep_ness.txt,Introduction
+
+La présente étude bibliographique décrit les notions de base nécessaires à l'appréciation de la pro-
+blématique de mon stage au sein de l'équipe CORDIAL de l'IRISA, dont le champ d'étude concerne
+
+le dialogue oral homme-machine. Ce champ d'étude inclut notamment la synthèse de parole de haute
+qualité à partir du texte, qui est le cadre de mon stage.
+Un signal de parole correspond à acte parlé d'origine humaine. Ce signal correspond à une réalité très
+concrète, une onde acoustique produite par l'appareil phonatoire (larynx, cavité buccale), mais dont la
+production fait intervenir des plans relativement complexes allant d'aspects de physiologie à des principes
+de cognition. Chercher à comprendre les mécanismes à l'origine de ce phénomène et tenter de reproduire
+cette réalité a toujours animé des ambitions scientiques.
+On peut décrire un signal de parole par une séquence phonétique : une suite de consonnes et de
+voyelles donc, auxquels s'adjoint une prosodie. La prosodie est un ensemble de paramètres aussi variés
+que les accents, les tons, l'intonation, etc. [Di 00]. La phonétique a permis une classication des diérents
+éléments sonores mis en ÷uvre pour exprimer un message parlé. Ces événements sonores, ou phones, sont
+produits de diérentes manières (vibration des cordes vocales, bruits de frictions, bruits explosifs, etc)
+en diérents points d'articulation (position de langue pour les voyelles, points de constriction pour les
+consonnes). De plus la réalisation d'un son dépend le plus souvent de son contexte, passé, mais aussi futur
+(on parle alors de coarticulation). Les phones ont également des caractéristiques spectrales particulières
+qui les distinguent. La phonétique retient la notion de formants, susant pour décrire les principaux
+
+éléments sonores dans une langue. Il s'agit de fréquences particulières correspondant aux modes de réso-
+nances des cavités supraglottiques. Les deux premiers formants, nommés F1 et F2, sont par exemple très
+
+utilisés pour caractériser les voyelles. Le formant F1 est corrélé à l'ouverture de la bouche, ou aperture,
+et oscille typiquement entre 320 et 1000 Hz pour les diérentes voyelles du français. Le F2 correspond à
+la place de la langue dans la bouche (avant/arrière) et oscille entre 800 et 3200 Hz en français. Au delà
+des formants, la réponse fréquentielle du système physique résonant permet de caractériser l'ensemble
+
+des sons produits par un locuteur. A ces caractéristiques spectrales, il faut ajouter la fréquence fonda-
+mentale, F0 (i.e. la hauteur de la voix), qui caractérise la notion de mélodie pour les sons vibrant ainsi
+
+que les informations de rythme (débit syllabique) etc. Le lecteur soucieux d'en apprendre plus sur l'ana-
+lyse de la parole pourra se reporter à l'excellent livre  La parole et son traitement automatique  [Cal89].
+
+A partir d'un signal de parole, on peut distinguer une activité de recherche qui vise à comprendre
+les diérents processus impliqués dans la création de ce signal acoustique pour remonter à des modèles
+d'interprétation linguistique voire sémantique. On cherche par exemple à retrouver la séquence des mots
+
+qui correspondent un une phrase parlée (on parle de reconnaissance de la parole). A partir d'une descrip-
+tion linguistique, on peut chercher à étudier des mécanismes et proposer des modèles de description qui
+
+permettent de créer une parole articielle qui correspondrait à la lecture d'un message texte (on parle de
+synthèse de la parole à partir du texte).
+Cette étude bibliographique s'inscrit dans le cadre des études sur la synthèse articielle d'un signal
+de parole produit à partir d'une description linguistique qui le plus souvent est une séquence de mots.
+Le stage, intitulé  Performances des unités sandwich en synthèse de la parole à partir du texte  fait
+intervenir deux concepts. Tout d'abord celui d'un système de synthèse de la parole à partir du texte (1
+et 2) dont la qualité dépend du contenu d'un corpus de parole. Ce deuxième concept, le contenu d'une
+base de parole nécessaire à la mise en ÷vre d'un système de synthèse, sera le point d'étude de mon stage.
+Il s'agit d'étudier une nouvelle entité acoustique, dénommé sandwich ou ou sandwich vocalique, qui sera décrite dans le chapitre 3. Il s'agit d'une unité phonétique particulière et récemment proposée par Didier
+Cadic [CBD09]. Ces unités ont été introduites dans le but d'améliorer la qualité des systèmes de synthèse
+de parole par sélection d'unités. Dans les travaux de Didier Cadic, ces nouvelles unités on été introduites
+lors de l'étape de construction d'un corpus et validées par un système de synthèse ne cherchant pas à
+exploiter particulièrement ces unités. Lors de la phase de construction du corpus de parole, il s'agit de
+choisir le plus judicieusement possible les phrases que l'on va faire dire à un locuteur humain pour en
+retirer de l'information utilisée ultérieurement pour la synthèse.
+
+Pour arriver à ces ns, la présentation s'articulera autour des points suivants. Dans un premier cha-
+pitre, nous décrirons les principes sur lesquels repose un système de synthèse de parole à partir du texte
+
+et quelques problématiques en découlant. Nous passerons ensuite en revue les trois principales méthode
+de synthèse que l'on retrouve dans la littérature. Un deuxième chapitre présentera les deux systèmes
+
+concurrents utilisée actuellement, la synthèse par sélection d'unités, dite synthèse par corpus, et la syn-
+thèse à base de modèles de Markov cachés. La synthèse par sélection d'unité est le système que je serai
+
+amené à utiliser lors de mon stage. Dans un dernier chapitre, nous présenterons les sandwichs vocaliques,
+utilisés au départ pour optimiser la phase de construction du corpus de parole servant de support au
+système de synthèse par sélection d'unités.
+Enn, la conclusion nous permettra de relier les notions de synthèse par sélection d'unités et les unités
+sandwich pour pleinement comprendre la problématique de mon stage dont l'objectif sera de modier
+l'algorithme de sélection des unités de manière à ternir compte explicitement des unités sandwitch. Ce
+point n'ayant pas été traité dans la thèse de Didier Cadic. En outre, nous y présenterons la manière dont
+nous procéderons pour répondre à cette problématique et les enseignements qui pourront en être retirés.
+1 Évolution de la synthèse de parole
+Ce chapitre a pour vocation de retracer l'évolution des systèmes de synthèse de parole à partir du
+texte, ou systèmes TTS (Text-to-Speech), depuis la machine parlante du baron Von Kempelen (1791)
+aux systèmes utilisés aujourd'hui (HTS et SPC). Ces derniers feront l'objet du chapitre 2, ils ne seront
+donc que brièvement expliqués dans ce chapitre.
+1.1 Qu'est qu'un système de synthèse de parole ?
+Avant toute chose, dénissons les diérentes caractéristiques communes à tous les systèmes de synthèse
+de parole. Un système de synthèse de parole reçoit en entrée un texte contenant des phrases à synthétiser
+(gure 1). Ces phrases sont écrites dans une langue donnée (français, anglais, allemand, etc.) et avec une
+syntaxe particulière. Il convient de noter l'importance de ces deux points. En eet, construire un système
+de synthèse pour le français conventionnel, écrit avec les règles de syntaxe usuelles est un problème déjà
+beaucoup plus simple que celui où l'on peut également utiliser les expressions issues des conversations
+SMS. Le problème deviendrait encore plus dicile si le texte d'entrée est écrit dans plusieurs langues. On
+voit donc l'importance de dénir dès le départ la langue et la syntaxe du langage acceptées par le système.
+Cependant, il ne s'agit pas de l'unique type de texte d'entrée. En 1979, [You79] introduit la synthèse
+à partir de concepts, on parle alors de synthèse Concept-to-Speech. Un concept est une entité particulière
+permettant de dénir une portion de phrase dont on sait qu'elle utilise une syntaxe particulière. Par
+exemple, pour demander au système de produire la phrase  Georges frappe le fer. , on va utiliser le
+concept (.FRAPPER, Georges, fer) où le verbe  FRAPPER  est une fonction à deux entrées prenant
+comme paramètres  Georges  et  fer . Dans la pratique cependant, les concepts (en tout cas les
+concepts complexes) restent diciles à générer. Voyons maintenant les autres caractéristiques générales
+
+2
+
+Fig. 1  Nomenclature générale d'un système de synthèse à partir du texte. Dans un tel système, le texte en entrée
+a son importance, il doit être écrit dans un langage et suivant une syntaxe reconnus par l'analyseur phonétique
+et prosodique du système. Ce dernier génère une transcription phonétique du texte accompagnée d'informations
+prosodiques. Une unité de traitements acoustiques utilise alors ces paramètres pour générer le signal vocal nal.
+d'un système de synthèse à partir du texte. En sortie, le système doit produire un signal sonore. Pour
+passer du texte d'entrée à cette onde sonore, le système doit (1) analyser le texte en entrée et le transformer
+en un jeu d'étiquettes et (2) utiliser un mécanisme utilisant cette information pour générer un signal
+sonore. Le point (1) est réalisé par un analyseur qui génère des données phonétiques (phonèmes) et
+prosodiques. Le point (2) est généralement ce qui varie en fonction des systèmes. Il s'agit dans tous les
+cas de traitements acoustiques eectués suivant l'information issue de (1).
+1.2 Les diérentes méthodes de synthèse
+
+Nous allons maintenant nous intéresser aux diérentes méthodes de synthèse vocale qui ont été utili-
+sées jusqu'à aujourd'hui. Nous nous concentrerons dans ce chapitre sur des principes, les mises en ÷vre
+
+ont bien sûr évoluées au l des avancées technologiques. Le chapitre suivant présentera les deux mé-
+thodes utilisées actuellement dans l'industrie et sur lesquelles portent l'essentiel des recherches, à savoir
+
+la synthèse par sélection d'unités et la synthèse par modèles de Markov cachés. La première approche,
+la synthèse articulatoire suit une hypothèse de production en cherchant à reproduire un comportement
+physiologique. La synthèse dite par règle et la synthèse par sélection d'unités se fondent quant à elles
+sur une hypothèse de production. Il s'agit de faire percevoir une parole humaine, avec des principes de
+réalisation diérents de ceux employés par l'homme.
+1.2.1 La synthèse articulatoire
+La première méthode qui fut testée pour produire articiellement de la parole est de reproduire le
+conduit vocal d'un être humain à l'aide d'éléments mécaniques. La machine de Von Kempelen suivait
+ce principe. Avec l'avènement de l'informatique, le calcul diérentiel et la mécanique des uides ont
+permis de modéliser le canal articulatoire plus formellement, mais sans résultat notable du point de vue
+de la qualité nale de la parole produite [Mer73]. Ces systèmes sourent de deux problèmes majeurs.
+D'une part, du fait du grand nombre de paramètres à prendre en compte pour reproduire un canal
+vocal valide, les concepteurs sont amenés à réaliser un grand nombre d'approximations qui nissent par
+donner une qualité de synthèse nale assez médiocre. D'autre part, les systèmes basés sur l'articulation
+engendrent beaucoup de calculs pour simuler le fonctionnement du conduit vocal. Ces inconvénients
+rendent ces systèmes pratiquement inutilisables en temps réel [Sto09]. Un exemple récent de synthèse de
+voix intelligible utilisant les techniques articulatoires est donné dans [Sto11].
+1.2.2 La synthèse par règles
+
+Le principe de la synthèse par règles est de savoir modéliser les diérents paramètres du signal pro-
+duit (historiquement les formants) à l'aide d'un ensemble de règles de production. Via ces règles, il s'agit
+
+principalement de savoir représenter les fréquences, les amplitudes et les bandes passantes des différents
+
+formants en fonction des contraintes du texte, notamment la coarticulation. Historiquement, un célèbre
+système de synthèse par règles, mis au point par D. Klatt est détaillé dans [Kla82]. D'une manière plus
+générale, une telle approche décrit des règles d'évolution des paramètres d'un modèle de génération du
+signal de parole. Les modèle du signal de parole font le plus souvent l'hypothèse d'une décomposition
+source/ltre, où l'onde de source, le signal à la hauteur du larynx, est convolué à un ltre (linéaire le plus
+souvent) caractérisant les modes de résonances du conduit vocal. Par rapport à l'approche précédente, ces
+
+systèmes reposent sur des modèles plus simples et non sur des contraintes complexes concernant l'écou-
+lement de l'air dans un milieu dynamique, permettant ainsi de simplier les calculs et donc d'obtenir
+
+un système temps réel ecace. L'inconvénient majeur de ce système est le timbre peu naturel des voix
+fabriquées, soulignant aisément leur caractère articiel.
+Historiquement les règles étaient des règles déterministes décrites par des systèmes experts. Il faut
+noter l'arrivée récente des systèmes de synthèse dits par HMM, qui nalement remettent ces idées à l'odre
+du jour en proposant des règles statistiques (on peut noter le système HTS). Des HMM sont d'abord appris
+sur un corpus d'apprentissage de manière à capturer la dynamique spectrale des événements sonores. Les
+HMM sont ensuite utilisés, à l'envers, comme générateur d'observations spectrales. Ces spectres articiels
+sont convertis en signal temporel par des modèles ad hoc. Le chapitre suivant présentera plus en détail
+ces nouveaux systèmes de synthèse.
+1.2.3 La synthèse par sélection et concaténation d'unités acoustiques
+La synthèse par sélection et concaténation d'unités acoustiques se base sur le principe de pioche dans
+un dictionnaire préenregistré d'unités phonétiques (de briques phonétiques élémentaires pourrait on dire)
+pour être concaténer en séquence. Le choix d'une unité acoustique dans le répertoire constitue l'une des
+
+principales problématiques de ces systèmes de synthèse. Les premiers systèmes, dans les années 50, utili-
+saient des phones [Har53]. Les cassures dans la prosodie et la coarticulation mal restituée, engendrées par
+
+la concaténation, [PLBS87] nuisent cependant très fortement à la qualité de ce type de synthèse. C'est
+ainsi que Küpfmüller et Warns dénissent une nouvelle unité acoustique en 1956, le diphone. Un diphone
+se dénit comme la deuxième moitié d'un phone et la première moitié du phone suivant. Le choix de
+couper au milieu des phones est lié au fait que les unités possèdent généralement un spectre plus stable à
+ce niveau, les pertes engendrées par la concaténation sont donc moins importantes que sur les transitions
+entre deux phonèmes. À la n de la synthèse, un algorithme (Pitch Synchronous OverLap Add method,
+ou PSOLA généralement) est utilisé pour modier la prosodie du signal de manière à coller au maximum
+aux consignes prosodiques déterminées par les traitements linguistiques.
+
+Le premier système de synthèse à base de diphones est dû à [EKMW64]. La synthèse par concaténa-
+tion de diphones est de bien meilleur qualité que la synthèse par concaténation de phones mais pas encore
+
+parfaite. D'autres unités ont donc été essayées, toujours plus longues : demi-syllabes [Fuj76], syllabe et
+disyllabe. D'autres tentatives ont été faites sur des unités sub-phonémiques : allophones, demi-allophones
+[Con99]. Il est important de noter les répercutions en terme de mémoire et de combinatoire induites par le
+choix d'une unité donnée : si une langue comporte, comme c'est le cas du Français, 35 phonèmes (donc 35
+phones à enregistrer), il y a théoriquement 352 diphones, 353 triphones, etc. Le problème est encore plus complexe si l'on a des unités multi-représentées (cf. paragraphe suivant), c'est-à-dire plusieurs instances d'une même unité acoustique.
+La vision de dictionnaire d'unités a beaucoup évolué au cours du temps. L'idée d'introduire plusieurs
+représentants d'une même unité (unités multi-représentées), motivée par les grandes diérences entre
+les unités selon leur contexte d'apparition, a entrainé le stockage des enregistrements sonores non plus
+dans un dictionnaire mais comme une longue séquence vocale annotée (marquage des débuts et ns de
+phones). Dans cette nouvelle perception des choses, on a un corpus de parole continue mais pas d'unité
+
+acoustique spéciquement dénie et découpée. L'unité n'apparaîtra qu'au moment ou l'on a besoin d'elle.
+C'est le principe de la synthèse par corpus (SPC). Il faudra alors, lorsque l'on a besoin d'une unité, savoir
+laquelle, dans le corpus, est la plus adaptée à son contexte souhaité lors de la synthèse. Cela implique
+de pénaliser les unités les moins adaptées, d'où la nécessité de dénir une notion de coût. C'est sur cette
+dernière évolution de la synthèse par sélection d'unités que porte notre stage.
+
+ErasmusVintek,howto.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/howto.txt,1. install JavaFx
+
+sudo apt install openjfx
+
+2. compile with the right options
+
+javac GameOfLife.java --module-path /usr/share/openjfx/lib --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web
+
+3. run with the right options
+
+java GameOfLife --module-path /usr/share/openjfx/lib --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web
+
+ErasmusVintek,GameOfLife.java,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/GameOfLife.java,import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.util.Random;
+
+public class GameOfLife extends Application {
+
+    private static final int CELL_SIZE = 10;
+    private static final int GRID_WIDTH = 80;
+    private static final int GRID_HEIGHT = 50;
+
+    private boolean[][] grid = new boolean[GRID_HEIGHT][GRID_WIDTH];
+    private boolean[][] nextGeneration = new boolean[GRID_HEIGHT][GRID_WIDTH];
+
+    private Canvas canvas;
+    private GraphicsContext gc;
+    private Timeline timeline;
+
+    @Override
+    public void start(Stage primaryStage) {
+        Group root = new Group();
+        canvas = new Canvas(GRID_WIDTH * CELL_SIZE, GRID_HEIGHT * CELL_SIZE);
+        gc = canvas.getGraphicsContext2D();
+        root.getChildren().add(canvas);
+
+        initializeGrid();
+
+        timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> {
+            updateGeneration();
+            render();
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Game of Life");
+        primaryStage.show();
+    }
+
+    private void initializeGrid() {
+        Random random = new Random();
+        for (int y = 0; y < GRID_HEIGHT; y++) {
+            for (int x = 0; x < GRID_WIDTH; x++) {
+                grid[y][x] = random.nextBoolean();
+            }
+        }
+    }
+
+    private void updateGeneration() {
+        for (int y = 0; y < GRID_HEIGHT; y++) {
+            for (int x = 0; x < GRID_WIDTH; x++) {
+                int neighbors = countNeighbors(y, x);
+                if (grid[y][x]) {
+                    nextGeneration[y][x] = (neighbors == 2 || neighbors == 3);
+                } else {
+                    nextGeneration[y][x] = (neighbors == 3);
+                }
+            }
+        }
+        boolean[][] temp = grid;
+        grid = nextGeneration;
+        nextGeneration = temp;
+    }
+
+    private int countNeighbors(int row, int col) {
+        int count = 0;
+        for (int y = row - 1; y <= row + 1; y++) {
+            for (int x = col - 1; x <= col + 1; x++) {
+                if (y >= 0 && y < GRID_HEIGHT && x >= 0 && x < GRID_WIDTH && !(y == row && x == col)) {
+                    if (grid[y][x]) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    private void render() {
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        for (int y = 0; y < GRID_HEIGHT; y++) {
+            for (int x = 0; x < GRID_WIDTH; x++) {
+                if (grid[y][x]) {
+                    gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+
+ErasmusVintek,ErasmusVintek_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/ErasmusVintek_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+02_00, ErasmusVintek, ressources/StudentProjects/howto.txt, 0.55, false, true, false
+02_01, ErasmusVintek, ressources/StudentProjects/GameOfLife.java, 0.45, false, true, false
+02_02, ErasmusVintek, ressources/StudentProjects/ErasmusVintek_score.csv, 0.58, false, true, false
+02_03, ErasmusVintek, ressources/StudentProjects/rapport.txt, 0.5, false, true, false
+
+ErasmusVintek,rapport.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/ErasmusVintek/rapport.txt,Rapport de projet
+Le jeu GameOfLife
+
+Erasmus Vintek
+30 octobre 2013
+
+1. Introduction
+
+Le jeu Game of Life, également connu sous le nom de "vie", est un automate cellulaire imaginé par le mathématicien britannique John Horton Conway en 1970. Bien que ses règles soient simples, le jeu peut générer des motifs complexes et fascinants. Dans ce document, nous allons explorer le jeu Game of Life, présenter ses règles, mettre en œuvre une version en Java et effectuer des tests pour illustrer son fonctionnement.
+2. Présentation du jeu
+
+Le jeu Game of Life se déroule sur une grille bidimensionnelle infinie de cellules carrées. Chaque cellule peut être dans l'un des deux états : vivante ou morte. À chaque étape, l'état de chaque cellule est déterminé par un ensemble de règles simples :
+
+    Une cellule morte ayant exactement 3 voisines vivantes devient vivante (naissance).
+    Une cellule vivante ayant moins de 2 voisines vivantes meurt (sous-population).
+    Une cellule vivante ayant 2 ou 3 voisines vivantes reste vivante.
+    Une cellule vivante ayant plus de 3 voisines vivantes meurt (surpeuplement).
+
+Ces règles simples engendrent des motifs dynamiques et imprévisibles, permettant aux joueurs d'observer l'évolution et l'émergence de structures complexes dans la grille.
+3. Implémentation en Java
+
+Nous allons maintenant implémenter le jeu Game of Life en Java en utilisant une représentation de la grille à l'aide d'un tableau bidimensionnel. Nous créerons une classe GameOfLife qui gérera la logique du jeu, l'initialisation de la grille, et les règles de transition entre les générations successives.
+
+java
+
+// Implémentation en Java du jeu Game of Life
+public class GameOfLife {
+    private int[][] grid;
+    private int rows;
+    private int cols;
+
+    public GameOfLife(int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
+        this.grid = new int[rows][cols];
+        initializeGrid();
+    }
+
+    private void initializeGrid() {
+        // Initialiser la grille avec des cellules vivantes ou mortes
+        // selon un motif prédéfini ou aléatoire
+    }
+
+    public void nextGeneration() {
+        // Calculer la prochaine génération en appliquant les règles du jeu
+    }
+
+    public void displayGrid() {
+        // Afficher la grille à l'écran
+    }
+
+    // Autres méthodes pour manipuler la grille, etc.
+}
+
+4. Test
+
+Pour tester notre implémentation, nous pouvons créer une instance de la classe GameOfLife avec une grille initiale spécifique, puis simuler plusieurs générations successives pour observer l'évolution de la grille.
+
+java
+
+// Test de l'implémentation du jeu Game of Life
+public class GameOfLifeTest {
+    public static void main(String[] args) {
+        GameOfLife game = new GameOfLife(10, 10);
+        game.displayGrid();
+        
+        for (int i = 0; i < 10; i++) {
+            game.nextGeneration();
+            game.displayGrid();
+        }
+    }
+}
+
+5. Conclusion
+
+Le jeu Game of Life est un exemple fascinant d'un système dynamique simple mais complexe. Bien que ses règles soient basiques, il peut générer des configurations complexes et imprévisibles. L'implémentation en Java que nous avons réalisée démontre la simplicité de modéliser et de simuler des systèmes cellulaires dans un environnement de programmation. Ce jeu reste toujours un sujet d'étude populaire dans les domaines des mathématiques, de la biologie et de l'informatique. En tant que tel, il continue d'attirer l'intérêt des chercheurs et des amateurs de jeux.
+
+J'ai beaucoup apprécié ce projet mais c'était très dur et cela m'a pris beaucoup de temps. 
+
+MattSenex,rapport_senex.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/rapport_senex.txt,
+			Rapport de projet NabuTalk
+	Réalisation d'un agent conversationnel pour le site de l'ENSSAT
+
+				Matt Senex
+
+				21 octobre 2013
+
+Introduction
+
+Le présent rapport rend compte du travail que nous avons réalisé sur le projet d'agent
+conversationnel pour le site principal de l'ENSSAT. Le but de ce projet est de réaliser un agent
+automatique capable de répondre de manière textuelle à une question d'un utilisateur. Le champ de
+questions auquel l'agent doit être capable de répondre se limite à quatre sujets, pour lesquels les
+principales questions doivent être prises en compte : L'ENSSAT en général, les modalités
+d'admission, et les formations LSI et IMR offertes par l'ENSSAT.
+Le présent rapport, dont l'objectif est de présenter la réponse technique, réalisée à l'aide du langage
+NabuTalk, apportée à ce problème. Notre compte rendu se découpera donc en trois parties. D'abord,
+nous présenterons la manière dont nous avons implémenté le jeu de questions/réponses demandé
+dans le cahier des charges. Ensuite, nous détaillerons le fonctionnement de « notre tunnel
+d'acquisition des paramètres », système par lequel nous tâchons de récupérer deux paramètres
+essentiels pour guider au mieux l'utilisateur. Enfin, la méthode de récupération de l'adresse mail de
+l'utilisateur - nécessaire pour lui envoyer des informations supplémentaires - sera détaillée dans la
+dernière partie.
+
+1. Questions/réponses
+Dans cette première partie, nous détaillons l'implémentation du jeu de questions/réponses demandé
+dans le cahier des charges de l'application. Il est basé sur les quatre sujets suivants : l'ENSSAT,
+l'admission, la formation LSI et la formation IMR.
+1.1 Partie ENSSAT
+Le premier type de questions que peut poser l'utilisateur est aussi le plus général : Il s'agit de
+questions sur l'école elle-même. Trois types de questions sont renseignées par l'agent. D'abord, les
+questions générales sur l'ENSSAT, les questions sur l'habilitation de l'ENSSAT et enfin celles
+portant sur les différentes formations de l'ENSSAT.
+Ces différentes questions de l'utilisateur sont tout d'abord reconnues à l'aide de plusieurs modèles de
+langage :
+
+(nlu-resource [id:con_specialites]
+alt({
+
+alt({[quel] [sont]} {[c-est] [quoi]})
+alt([specialite] [formation] "filieres" "filières" "cycles d'etude"
+
+"cycles d'étude")
+
+optional([enssat])}
+
+)
+)
+(nlu-resource [id:con_certifiee]
+{ optional([est-ce-que])
+optional(alt([enssat] [ecole]))
+alt([est] {[a] [ete]} {[a] [elle] [ete]})
+alt(#certifiee# #certifiée# #habilitee# #habilitée#)
+optional({[par] alt("CTI" "cti" [organisme] {"comission" [au] [titre]
+
+[ingenieur]})})}
+)
+
+Ces modèles (entre autres) sont utilisés par les dialogue-units : what-is(enssat) (pour répondre aux
+questions du type « Qu'est-ce que l'ENSSAT »), which-specialite(enssat) (pour répondre aux
+questions sur les différentes filières à l'ENSSAT), is-certified(enssat) (pour répondre à des
+questions du type « L'ENSSAT est elle certifiée ? »).
+Enfin, le dialogue-unit , déjà implémenté avec le code source de départ, répond aux questions sur la
+localisation géographique de l'ENSSAT.
+Jeux de tests :
+
+101) User : Qu'est-ce que l'ENSSAT ?
+Agent : L'ENSSAT est l'Ecole Nationale [...] et des technologies emergentes. Avez-vous une autre question ?
+102) User : L'école est elle certifiée ?
+Agent : L'ENSSAT est habilitee par [...] de qualite EUR-ACE. En quoi puis-je vous aider ?
+103) User : Quelles sont les spécialités à l'ENSSAT ?
+Agent : L'ENSSAT possède quatre filières : EII pour Electronique et Informatique Industrielle, OPT pour Optronique et
+les deux formations en informatique [...] et Reseaux).
+104) User : Où se situe l'ENSSAT ?
+Agent : L'ENSSAT est à <a href="http://www.ville-lannion.fr">Lannion</a> dans les Côtes d'Armor. Avez-vous une
+autre question ?
+
+1.2 Partie Admission
+L'utilisateur peut poser des questions concernant l'admission à l'Enssat. Nous avons défini avec des
+modèles les différents types de formulations possibles des questions, puis des dialogue unit ont été
+défini pour capter les questions correspondant à des modèles et proposer la réponse adéquate.
+Questions du type : comment faire pour intégrer l'enssat ?
+
+Définition du modèle de questions :
+(nlu-resource [id:question_integrer_enssat]
+{alt([comment]) optional("faire pour") optional([syn_puis-je] ) alt( "integrer"
+"entrer" "postuler") {optional( " a " ) " l'enssat "} }
+)
+(nlu-resource [id:question_integrer_enssat_apres]
+{alt([syn_puis-je]) optional(alt("de" "d'")) alt("faire " alt( "integrer" "entrer"
+"postuler")) {optional( " a " ) " l'enssat "} alt([avec] [apres]) alt([un] [une])
+alt("classe prepa" "classe preparatoire" "dut" "iut" "bts") }
+)
+(nlu-resource [id:question_quelles_formations]
+{ alt("quelles" "quels") alt("formations" "cursus") "permettent" alt("de" "d'")
+alt("faire " alt( "integrer" "entrer" "postuler")) {optional( " a " ) " l'enssat "} }
+)
+Jeux de tests :
+User : comment faire pour intégrer l'enssat ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII, DUT Informatique, DUT Reseaux et Telecommunications, DUT Mesures
+Physiques, Licence 2-3 Informatique, BTS Photonique et autres. Il est possible d'integrer l'enssat en 2e annee sur dossier
+pour les titulaires d'une premiere annee de master (M1) ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : comment puis je intégrer l'enssat ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII, [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : comment faire pour entrer à l'enssat ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII, [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : est ce que je peux integrer l'enssat avec un dut ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : est ce possible d'entrer à l'enssat après un bts ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+c'est possible de postuler à l'enssat après une classe prépa ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : quelles formations permettent d'intégrer l'enssat ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+User : quels cursus permettent de faire l'enssat ?
+Agent : L'ENSSAT est intégrable en 1ere annee via: le concours Telecom INT/ATS pour les classes preparatoires MP, PC,
+PSI, PT, TSI et ATS. et sur titres pour les DUT GEII [...] ou d'un diplome etranger equivalent. Que puis-je pour vous ?
+
+Questions concernant les contacts pour l'admission
+Définition du modèle de questions :
+(nlu-resource [id:question_contact_admission]
+
+{ optional("a") alt("qui") alt("doit-on" "peut-on") alt("contacter" "s'adresser")
+alt("pour" "a propos") alt("les" "l'" "des") alt("inscriptions" "inscription"
+"dossiers" "documents" "demarches") optional(alt("administratives" "administratifs"
+"d'admission")) }
+)
+Jeux de tests :
+User : a qui doit-on s'adresser pour les dossiers d'admission ?
+Agent : Catherine Delen, telephone: 02 96 46 90 60, email: secretariat.concours que puis-je pour vous ?
+User : qui peut-on contacter a propos des demarches administratives ?
+Agent : Catherine Delen, telephone: 02 96 46 90 60, email: secretariat.concours que puis-je pour vous ?
+Questions concernant les modalités d'inscription
+Définition du modèle de questions :
+(nlu-resource [id:modalites_admission]
+{ alt("quelles") alt("sont") alt("les modalites") alt("d' ") alt("inscription"
+"admission") optional({"en" alt("premiere" "1ere") "annee"})}
+)
+(nlu-resource [id:modalites_admission_date]
+{ alt("quelles") alt("sont") alt("les dates") optional("limites") alt("d' " "du"
+"des") optional("jury") optional("d'") alt("inscription" "admission" "concours")
+optional({"en" alt("premiere" "1ere") "annee"})}
+)
+Jeux de tests :
+User : quelles sont les modalites d'inscription ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les modalites d'admission en 1ere annee ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates limites d'inscription ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates des concours ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates du jury d'admission ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+
+1.3 Partie LSI
+Notre agent conversationnel est capable de répondre à trois types de questions sur la filière LSI :
+{ optional("a") alt("qui") alt("doit-on" "peut-on") alt("contacter" "s'adresser")
+alt("pour" "a propos") alt("les" "l'" "des") alt("inscriptions" "inscription"
+"dossiers" "documents" "demarches") optional(alt("administratives" "administratifs"
+"d'admission")) }
+)
+Jeux de tests :
+User : a qui doit-on s'adresser pour les dossiers d'admission ?
+Agent : Catherine Delen, telephone: 02 96 46 90 60, email: secretariat.concours que puis-je pour vous ?
+User : qui peut-on contacter a propos des demarches administratives ?
+Agent : Catherine Delen, telephone: 02 96 46 90 60, email: secretariat.concours que puis-je pour vous ?
+Questions concernant les modalités d'inscription
+Définition du modèle de questions :
+(nlu-resource [id:modalites_admission]
+{ alt("quelles") alt("sont") alt("les modalites") alt("d' ") alt("inscription"
+"admission") optional({"en" alt("premiere" "1ere") "annee"})}
+)
+(nlu-resource [id:modalites_admission_date]
+{ alt("quelles") alt("sont") alt("les dates") optional("limites") alt("d' " "du"
+"des") optional("jury") optional("d'") alt("inscription" "admission" "concours")
+optional({"en" alt("premiere" "1ere") "annee"})}
+)
+Jeux de tests :
+User : quelles sont les modalites d'inscription ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les modalites d'admission en 1ere annee ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates limites d'inscription ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates des concours ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+User : quelles sont les dates du jury d'admission ?
+Agent : Pour les classes preparatoires scientifiques l'admission se fait sur concours TELECOM INT : les inscriptions se font
+du 10 decembre 2011 au 10 janvier 2012 sur [....] le vendredi 29 juin 2012 . en quoi puis-je vous aider ?
+
+1.3 Partie LSI
+Notre agent conversationnel est capable de répondre à trois types de questions sur la filière LSI :
+
+1.4 Partie IMR
+La gestion des réponses aux questions portant sur la filière IMR est identique à celle effectuée pour
+la partie LSI. Ainsi, on y retrouve une réponse aux questions du type « Qu'est-ce que la formation
+IMR ? » ou « Quels sont les contenus de la formation IMR ? ». Comme dit précédemment, les
+
+questions du type « Qu'est-ce que la compétence secondaire ? » sont traitées dans un même dialog-
+unit, avec une réponse générale. Pour plus de détail, se reporter à la section 1.3 « Partie LSI » ou au
+
+code.
+
+2. Tunnel d'acquisition
+Dans la première partie, nous avons défini des unités de dialogue simples apportant des réponses à
+une question explicite de l'utilisateur. Pour proposer des informations plus pertinentes à l'utilisateur,
+il faut disposer de renseignements sur l'utilisateur. Dans notre cas, il s'agit 1) de la formation
+ENSSAT qui intéresse l'utilisateur s'il y en a une et 2) du type de formation dont vient l'utilisateur.
+Pour ce faire, un surcroit de spécification s'impose. L'information « formation souhaitée » est une
+variable pouvant prendre trois valeurs : ''LSI'', ''IMR'' ou ''AUCUN''. L'information « Formation
+antérieure » peut elle prendre valeurs : ''CPGE'', ''DUT'', ''BTS'' ou ''AUTRE''.
+L'acquisition de ces paramètres peut se faire de deux manières différentes :
+1. Spontanément : L'utilisateur fournit les informations sans demande de notre agent. Il suffit
+alors de les récupérer.
+2. En cas de question explicite de l'utilisateur sur une formation. L'agent demande alors à
+l'utilisateur les informations qui lui manquent.
+Pour le cas spontané, trois sous-cas sont possibles, selon que l'utilisateur entre l'une ou l'autre des
+informations ou les deux en même temps. Cela conduit à trois dialog-units :
+– Un pour le cas où l'utilisateur donne sa formation préférée cas (1)
+– Un où l'utilisateur donne sa provenance cas (2)
+– Un où il fournit d'abord sa provenance puis sa formation préférée ou l'inverse cas (3)
+Voici les trois dialog-units qui initient ce dialogue :
+
+dialogue-unit[
+id:spontane(formation)
+input: {optional([provenance]) [formation($f)]}
+effect:{
+(u-formationAnterieure $f)
+goto(from-formation($f))
+}
+]
+dialogue-unit[
+id:spontane(interet)
+input: [interet($i)]
+output: "Heureux de l'apprendre,"
+effect:{
+(u-interetMarque $i)
+
+goto(noter-interet($i))
+
+}
+]
+dialogue-unit[
+id:spontane-supreme
+input: alt({optional([provenance]) [formation($f)] [et] [interet($i)]}
+{[interet($i)] [et] optional([provenance]) [formation($f)]}
+)
+output: "J'en prends note."
+effect:{
+
+(u-interetMarque $i)
+(u-formationAnterieure $f)
+goto(from-formation($f))
+}
+]
+Dans les cas 2 et 3, on redirige ensuite vers un dialog-unit spécifique à la provenance (ou formation
+antérieure) de l'interlocuteur. Voici, l'un de ces dialog-units, dédié aux utilisateurs venant de classes
+préparatoires :
+dialogue-unit[
+id:from-formation(CPGE)
+output:{"Dans ce cas, pour aller en LSI, vous devrez suivre un semestre général
+vous permettant de voir ce qui se fait à l'ENSSAT en informatique, électronique et
+optronique. A l'issue de ce semestre, vous pourrez choisir la formation LSI. Veuillez
+noter que vous ne pouvez pas aller en IMR avec cette formation."}
+]
+Dans le cas 1, en revanche, on en prend simplement note en proposant un complément
+d'informations sur la formation envisagée, c'est le rôle des dialog-units noter-interet($x) :
+
+dialogue-unit[
+id:noter-interet(lsi)
+output:"je peux peut-être vous renseigner plus en detail sur cette formation ?"
+next:{
+dialogue-unit[
+input:{alt([con_yes] [con_agree])}
+goto:what-is(lsi)
+]
+
+dialogue-unit[
+input:alt([con_i-dont-know] [con_none] [con_it-doesnt-matter]
+
+[con_no] [con_disagree])
+
+output:"d'accord, je vous laisse naviguer sur le site."
+]
+
+}
+]
+Jeux de tests :
+101) User : Je viens de DUT et je veux aller en LSI
+Agent : J'en prends note. Avec cette [...] qu'apprenti-ingénieur. En quoi puis-je vous aider ?
+101) User : Je veux aller en LSI et je viens de prepa
+Agent : J'en prends note. Dans ce cas [...] Veuillez noter que vous ne pouvez pas aller en IMR avec cette formation. En
+quoi puis-je vous aider ?
+101) User : Je veux aller en LSI
+Agent : Heureux de l'apprendre, je peux peut-être vous renseigner plus en detail sur cette formation ?
+102) User : Oui
+Agent : La filiere LSI est un cycle de trois ans specialise dans le [...] communicants et mobiles.
+101) User : J'ai fait un BTS
+Agent : Avec cette formation, vous pouvez aller en IMR ou en LSI. L'admission se fait sur dossier. En IMR, il faut en
+plus trouver une entreprise prête à vous embaucher en tant qu'apprenti-ingénieur.
+
+L'autre façon de recueillir ces paramètres est sur une question de l'utilisateur. Ainsi, plusieurs
+
+dialog-units, gérant des questions du genre « Qu'est-ce que IMR ? » redirigent vers des dialogue-
+units d'acquisition comme acquisition-specialite-lsi ou acquisition-specialite-imr qui se
+
+chargent de recueillir la spécialité qui intéresse l'interlocuteur. Un exemple de tel dialogue-unit est
+le suivant :
+dialogue-unit[
+id:acquisition-specialite-lsi
+category:lsi
+output:"La formation LSI est-elle celle qui vous interesse le plus ?"
+next:{
+dialogue-unit[
+
+id:specialite-preferee
+input:alt([con_yes] [con_agree])
+effect:{(u-interetMarque "LSI")} // Noter l'interet
+output:"D'accord, je note que vous souhaitez aller en"
+goto:afficherInteret()
+]
+dialogue-unit[
+input:alt([con_no] [con_disagree] [specialite(IMR)])
+effect:{(u-interetMarque "IMR")}
+output:"d'accord, je note que vous souhaitez aller en"
+goto:afficherInteret()
+]
+dialogue-unit[
+input:alt([con_it-doesnt-matter] [con_i-dont-know] [con_none])
+effect:{(u-interetMarque "AUCUN")}
+output:"d'accord, je vous laisse naviguer sur le site."
+]
+dialogue-unit[
+input:alt([con_no] [con_disagree])
+output:"d'accord, je vous laisse naviguer sur le site."
+]
+}
+]
+On voit que, à l'issue du traitement, on utilise le dialogue-unit afficherInteret() pour afficher le
+contenu de la variable u-interetMarque dans laquelle on a enregistré la formation qui intéresse
+l'utilisateur. Ce dialogue-unit a une autre fonction : rediriger vers le dialogue-unit
+demanderFormationAnterieure() qui se charge de recueillir auprès de l'utilisateur la formation avec
+laquelle il souhaite postuler pour entrer à l'ENSSAT. Cette deuxième information est recuillie dans
+la variable u-formationAnterieure.
+Une autre méthode à également été implémentée pour recuillir la formation qui intéresse
+l'interlocuteur : une demande est faite lors d'un passage dans le dialogue-unit relance(lsi-imr).
+Comme celui-ci est commun aux deux formations, la demande est générale et traité dans le
+dialogue-unit prendreSpecialite().
+Ce tunnel d'acquisition a également nécessité la rédaction de modèles de langages particuliers,
+relatifs aux formations antérieures et aux marques d'intérêt pour une filière.
+
+Conclusion
+Le travail présenté ici couvre l'essentiel des demandes du cahier des charges, sans bug connu sur ces
+fonctionnalités. Il est cependant important de noter que même si nous avons cherché à couvrir le
+plus grand nombre de formulations possibles d'une même question de l'utilisateur, il est illusoire de
+espérer obtenir une couverture totale de l'éventail des différentes formulations en langage naturel.
+
+Ainsi, les améliorations possibles de notre travail pourraient se faire sur plusieurs points. D'abord,
+on pourrait tenter d'obtenir une plus large couverture de formulations pour les questions/réponses
+implémentées. Il est également possible d'implémenter plus de questions/réponses et de développer
+les capacités de dialogue contextuel (questions faisant références aux réponses antérieures dans le
+dialogue) de notre automate, assez pauvre en la matière pour l'instant. Nous regrettons également de
+ne pas avoir réussi à déployer correctement l'application sur le serveur « bac à sable » de Dialonics
+(tentative avec XX = 44 ).
+
+
+MattSenex,intro.code,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/intro.code,(nlu-resource [id:con_specialites]
+alt({
+
+alt({[quel] [sont]} {[c-est] [quoi]})
+alt([specialite] [formation] "filieres" "filières" "cycles d'etude"
+
+"cycles d'étude")
+
+optional([enssat])}
+
+)
+)
+(nlu-resource [id:con_certifiee]
+{ optional([est-ce-que])
+optional(alt([enssat] [ecole]))
+alt([est] {[a] [ete]} {[a] [elle] [ete]})
+alt(#certifiee# #certifiée# #habilitee# #habilitée#)
+optional({[par] alt("CTI" "cti" [organisme] {"comission" [au] [titre]
+
+[ingenieur]})})}
+)
+
+MattSenex,MattSenex_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/MattSenex/MattSenex_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+03_00, MattSenex, ressources/StudentProjects/rapport_senex.txt, 0.5, false, true, false
+03_01, MattSenex, ressources/StudentProjects/intro.code, 0.38, false, true, false
+03_02, MattSenex, ressources/StudentProjects/MattSenex_score.csv, 0.64, false, true, false
+
+Ethan_MountainDewMaster,truc_super_long.py,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/truc_super_long.py,import os
+import glob
+import click
+from tqdm import tqdm
+
+def list_long_wav_files(directory, duration_threshold, output_file):
+    wav_files = glob.glob(os.path.join(directory, '**/*.wav'), recursive=True)
+
+    long_wav_files = []
+    
+    with tqdm(total=len(wav_files), desc='Parsing directory') as pbar:
+        for wav_file in wav_files:
+            duration = get_wav_duration(wav_file)
+            if duration > duration_threshold:
+                long_wav_files.append(wav_file)
+            pbar.update(1)
+
+    with open(output_file, 'w') as file:
+        for file_path in long_wav_files:
+            file.write(file_path + '\n')
+
+def get_wav_duration(wav_file):
+    try:
+        import soundfile as sf
+        data, sample_rate = sf.read(wav_file)
+        duration = len(data) / float(sample_rate)
+        return duration
+    except ImportError:
+        import wave
+        with wave.open(wav_file, 'rb') as wav:
+            frames = wav.getnframes()
+            rate = wav.getframerate()
+            duration = frames / float(rate)
+            return duration
+
+@click.command()
+@click.argument('directory', type=click.Path(exists=True, file_okay=False, resolve_path=True))
+@click.argument('out_file', type=click.Path(exists=False, dir_okay=False, resolve_path=True))
+@click.option('-d', '--duration_threshold', default=1, required=False, type=int)
+def main(directory, out_file, duration_threshold):
+    duration_threshold = 20.0  # Minimum duration in seconds
+    list_long_wav_files(directory, duration_threshold, out_file)
+
+if __name__ == '__main__':
+        main()
+
+Ethan_MountainDewMaster,Ethan_MountainDewMaster_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/Ethan_MountainDewMaster_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+04_00, Ethan_MountainDewMaster, ressources/StudentProjects/truc_super_long.py, 0.55, false, true, false
+04_01, Ethan_MountainDewMaster, ressources/StudentProjects/Ethan_MountainDewMaster_score.csv, 0.46, false, true, false
+04_02, Ethan_MountainDewMaster, ressources/StudentProjects/super_script.py, 0.51, false, true, false
+
+Ethan_MountainDewMaster,super_script.py,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Ethan_MountainDewMaster/super_script.py,import csv
+import click
+import pandas as pd
+from tqdm import tqdm
+
+CHOICES = {"train-clean-100":"english", "train-clean-360":"english", "mls_french":"french", "mls_german":"german", "mls_portuguese":"portuguese", "mls_polish":"polish", "mls_dutch":"dutch", "mls_spanish":"spanish", "mls_italian":"italian"}
+
+def find_lang(text:str) -> str:
+    for choice, lg in CHOICES.items():
+        if choice in text:
+            return lg
+    exit(f"ERROR: String {text} must match one of the following choices: {CHOICES}")
+
+@click.command()
+@click.argument('csv_file', type=str)# type=click.File('r'))
+@click.argument('wav_list_file', type=click.File('r'))
+@click.argument('output_file', type=click.File('w'))
+def match_lines(csv_file, wav_list_file, output_file):
+    csvdata = {}
+    with open(csv_file, newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter='\t', quotechar='|')
+        for row in reader:
+            csvdata[row[0]] = row[1]
+
+    # Read the lines of the WAV list into a list
+    wav_list_lines = wav_list_file.readlines()
+
+    # Create an empty list to store the matched lines
+    matched_lines = []
+
+    # Match each line of the CSV with the associated line in the WAV list with tqdm progress bar
+    for basename, transcription in tqdm(csvdata.items(), total=len(csvdata)):
+        found = False
+        #print(f"{basename}")
+        for line in wav_list_lines:
+            if basename in line:
+                line= line.strip()
+                lg = find_lang(line)
+                matched_lines.append([lg, basename, transcription])
+                found = True
+                # if "103_1241_000020_000005" in basename:
+                #    print(f"OK = {lg}, {basename}, {transcription}")
+                #    exit(1)
+                break
+        if not found:
+            click.echo(f"Could not find a match for: {basename}")
+
+    # Create a DataFrame with the matched lines and export it to a new CSV file
+    matched_df = pd.DataFrame(matched_lines, columns=['Language', 'Basename', 'Transcript'])
+    matched_df.to_csv(output_file, sep='\t', index=False)
+
+    #with open('test.csv', 'w', newline='') as csvfile:
+    #    fieldnames = ['Language', 'Basename', 'Transcript']
+    #    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    #    writer.writeheader()
+    #    for line in matched_lines:
+    #        writer.writerow({'Language': line[0], 'Basename': line[1], 'Transcript': line[2]})
+
+    print("Matching completed successfully!")
+
+
+if __name__ == '__main__':
+    match_lines()
+
+
+Boby,Boby_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Boby/Boby_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+05_00, Boby, ressources/StudentProjects/Boby_score.csv, 0.28, false, true, false
+05_01, Boby, ressources/StudentProjects/Report.txt, 0.52, false, true, false
+
+Boby,Report.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/Boby/Report.txt,Rapport TDI
+
+I - Structure de la TDI
+La TDI (Table Des Identificateurs) est une structure de données permettant d’enregistrer des éléments clefs nécessaires au cours du processus de compilation.
+La TDI permet de stocker des informations concernant les classes, les attributs, les méthodes,  les variables locales et globales.
+
+Un certain nombre de méthodes sont disponibles afin d’ajouter, modifier et supprimer des éléments dans la table des identifcateurs. Cependant nous ne pouvons accéder au code sources de ces méthodes (seul un point jar nous est fourni) et nous devons donc nous baser sur la documentation fournie.
+
+Une instanciation de la TDI est réalisée dans la classe PointGénération. Il s’agit en fait de la variable l qui est de type PListeGen et qui est en fait une référence sur la TDI.
+C’est au cours de ces différents points de génération que les principaux accès à la TDI vont être effectués.
+II - Appel des éléments de la TDI (ou système d’adressage particulier)
+Chaque élément présent dans la TDI est adressé de deux manières différentes :
+manière symbolique, c’est-à-dire par son identificateur,
+manière absolue, c’est-à-dire par son adresse statique. Le terme adresse statique fait référence au numéro d’ordre de la méthode dans l’expansion de la classe considérée.
+La dimension de l’adressage dépend de la nature des éléments appelés.
+
+Pour les classes et les variables globales, un espace à une dimension est suffisant pour repérer les éléments (voir ligne rouge sur la figure).
+
+Les attributs et les méthodes virtuelles d’une classe sont repérés dans un espace à deux dimensions avec une dimension représentant les classes (voir plan bleu sur la figure).
+
+Les paramètres et les variables locale des méthodes virtuelles dépendent d’une classe particulière et d’une méthode particulière. C’est pour cela que nous utilisons un repérage à trois dimensions (voir cube vert sur la figure).
+
+III - Exemple d’utilisation de la TDI
+La table des identificateurs doit être utilisée, par exemple, pour vérifier la validité des identificateurs. 
+Par exemple la compilation des instructions de création d’une classe nécessite la vérification qu’une telle classe (avec le même nom) n’est pas déjà enregistrée dans la TDI.
+De même, lors de la création d’une classe donnant lieu à un héritage, il convient de vérifier que la classe mère est bien renseignée au sein de la TDI.
+
+
+
+KevinTruaux,KevinTruaux_score.csv,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/KevinTruaux_score.csv,Id, NomEleve, NomSource, Score, IsRapport, IsNotRapport, IsAiMade
+06_00, KevinTruaux, ressources/StudentProjects/KevinTruaux_score.csv, 0.32, false, true, false
+06_01, KevinTruaux, ressources/StudentProjects/main.c, 0.39, false, true, false
+06_02, KevinTruaux, ressources/StudentProjects/rapport.txt, 0.51, false, true, false
+
+KevinTruaux,main.c,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/main.c,int main() {						  					// priorite = 1 
+
+	affiche("demarrage de main");		
+									// pour etape 3
+	sem1 = alloueSemaphore(1);
+	sem2 = alloueSemaphore(0);
+	blocage = alloueSemaphore(0);						// p1 est le premier a se terminer 
+
+	int pid1 = creeProcessus(PLUS_FORTE_PRIORITE,p1); 	// p1 demarre aussitôt
+	int pid2 = creeProcessus(PLUS_FORTE_PRIORITE,p2);
+
+			 
+	P(blocage);							
+
+	detruitProcessus(pid1);				
+	detruitProcessus(pid2);				
+	detruitProcessus(obtientPid());		
+
+	affiche("fin de main");				
+		  
+	return 0; // pour compilateur
+}
+
+KevinTruaux,rapport.txt,/home/gregoire/ENSSAT/IAI-1/Projets/DOO2/AIDetector_v3_Gregoire/StudentProjects/KevinTruaux/rapport.txt,Rapport projet WEB
+Partie contrôleur
+
+Sommaire
+
+Introduction	3
+1 Les différentes contrôleurs pour l'application Dwitter	3
+2 Le contrôleur principal	4
+3 Le contrôleur de messages	4
+4 Le contrôleur utilisateur	4
+5 Le contrôleur de notifications	4
+6 Le contrôleur de droits	4
+Conclusion	5
+
+Introduction
+------------
+
+	La partie contrôleur de l’application est le lien entre l’interface (la vue) et les données (le modèle). En effet, en fonction de la vue sélectionnée, la partie contrôleur va récupérer les données correspondantes les fournir à la vue adéquat et l’afficher.
+	
+
+1 Les différentes contrôleurs pour l'application Dwitter
+--------------------------------------------------------
+
+	Pour répondre aux besoins définis dans le cahier des charges, et de façon à poser une implémentation judicieuse, la partie contrôleur est subdivisée en deux parties : 
+Le contrôleur principal
+Les contrôleurs secondaires, ou contrôleurs spécialisés ; manipulant des données et vues spécifiques
+
+	Le contrôleur principal a pour tâche d'effectuer le lien avec la vue. En effet, lorsque l'utilisateur effectue une action via la vue (passage sur une autre page, submit sur un formulaire, etc), un passage par le contrôleur principal est déclenché. Celui-ci, en fonction de l'action effectuée par l'utilisateur, déclenche les appels nécessaires aux contrôleurs spécialisés. 
+	Les contrôleurs secondaires, quant-à-eux, gèrent des traitement plus spécifiques du cahier des charges. Le rôle de ces contrôleurs secondaire est d’utiliser les instances des modèles pour récupérer les données et afficher les vues adéquates. Les différentes actions prévues pour être prises en charge par le site sont regroupées par similitudes. Par exemple, pour toutes les actions concernant un utilisateur du système, on utilisera les méthodes de la classe Utilisateur. Cette dernière régit le comportement et la politique du site par rapport à la gestion des utilisateurs. 
+
+	Les différents contrôleurs secondaires implémentés durant le projet sont les suivants : 
+- Le contrôleur utilisateur, dont le rôle a été explicité plus haut.
+- Le contrôleur de messages
+- Le contrôleur de droits
+- Le contrôleur de notifications
+
+
+
+2 Le contrôleur principal
+-------------------------
+
+	Implémenté par la classe ControleurPrincipal, le contrôleur principal occupe deux fonctions. D’une part, l’analyse de l’URL après une requête HTTP et d’autre part, l’appel au contrôleur chargé d’exécuter l’opération correspondant à la requête de l’utilisateur. Ces rôles sont respectivement implémentés dans la méthode includeControleur().
+Cette méthode appel tout d’abord la méthode getControleur(). Celle-ci va analyser le paramètre obj de l’URL. En fonction de sa valeur, le contrôleur principal va retourner le fichier correspondant au contrôleur secondaire adéquat.
+Le contrôleur principal va ensuite inclure le fichier retourné pour ensuite appeler la méthode execute(). Cette inclusion est nécessaire puisque c’est au sein de la méthode execute() que sera créé les contrôleurs secondaires qui eux exécuteront les requêtes de l’utilisateur.
+La création du contrôleur secondaire et l’appel de la méthode adéquat dépendra des valeurs des paramètres obj et action de l’URL. Si par exemple la valeur de obj et action sont respectivement message et vue_message, la méthode execute() créera une instance de la classe ControleurMessage en guise de contrôleur secondaire pour que ce dernier appel la méthode afficherMessage() qui affichera les messages.
+
+3 Le contrôleur de messages
+---------------------------
+
+Le contrôleur de messages est chargé de gérer les fonctionnalités liées à la messagerie dans l'application. Il permet d'afficher les messages, d'envoyer de nouveaux messages, de les modifier ou de les supprimer. En interagissant avec le modèle de données correspondant et en utilisant les vues appropriées, le contrôleur de messages assure le bon fonctionnement de cette partie de l'application.
+
+4 Le contrôleur utilisateur
+---------------------------
+
+Le contrôleur utilisateur est responsable de la gestion des utilisateurs dans le système. Il permet de créer de nouveaux comptes utilisateurs, de gérer les informations personnelles des utilisateurs, de gérer les droits d'accès et les permissions, ainsi que de gérer les sessions utilisateur. En coopération avec le modèle utilisateur et les vues associées, le contrôleur utilisateur assure la sécurité et la gestion efficace des utilisateurs dans l'application.
+
+5 Le contrôleur de notifications
+--------------------------------
+
+Le contrôleur de notifications est chargé de gérer les notifications envoyées aux utilisateurs de l'application. Il permet d'envoyer des notifications en temps réel ou différé, de les afficher aux utilisateurs et de gérer leur statut (lu ou non lu). En utilisant les fonctionnalités du modèle de notification et en interagissant avec les vues appropriées, le contrôleur de notifications assure une communication efficace entre l'application et ses utilisateurs.
+
+6 Le contrôleur de droits
+-------------------------
+
+Le contrôleur de droits gère les autorisations et les privilèges des utilisateurs dans l'application. Il permet de définir les droits d'accès à certaines fonctionnalités ou données en fonction du rôle ou du statut de l'utilisateur. En utilisant les fonctionnalités du modèle de droits et en coopération avec les vues correspondantes, le contrôleur de droits garantit une sécurité et une gestion appropriée des autorisations dans l'application.
+
+Conclusion
+----------
+
+Les différents contrôleurs de l'application jouent un rôle essentiel dans son fonctionnement. En coordonnant les interactions entre les utilisateurs, les données et les vues, ils assurent une expérience utilisateur fluide et sécurisée. La subdivision des contrôleurs en contrôleur principal et contrôleurs spécialisés permet une modularité et une maintenabilité accrues de l'application. En continuant à développer et à améliorer ces contrôleurs, l'application pourra répondre efficacement aux besoins de ses utilisateurs et évoluer en fonction des exigences futures.
+

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Projet {
     private String nom;
-    private String auteur = "Inconnu";
+    //private String auteur = "Inconnu";
     private List<FichierProjet> fichiers = new ArrayList<>();
 
     public Projet(String nom) {
@@ -16,13 +16,9 @@ public class Projet {
         return nom;
     }
 
-    public String getAuteur() {
-        return auteur;
-    }
+    //public String getAuteur() { return auteur; }
 
-    public void setAuteur(String auteur) {
-        this.auteur = auteur;
-    }
+    //public void setAuteur(String auteur) { this.auteur = auteur; }
 
     public List<FichierProjet> getFichiers() {
         return fichiers;
