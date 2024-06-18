@@ -33,6 +33,8 @@ Les variables choisies et affichées sont redondantes : nom, type, chemin compor
 
 La classe AppController était particulièrement incomplète, il a donc fallu la réécrire très largement.
 
+Le code de la V.2 était, dans son ensemble, très peu commenté.
+
 ### Tests Unitaires
 Le présent code source contient 11 tests unitaires JUnit testant l'ensemble des classes et méthodes du modèle.
 
